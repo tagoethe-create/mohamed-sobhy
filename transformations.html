@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Transformations | Mohamed Sobhy</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@300;400;500;600;700&family=Barlow+Condensed:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--black:#0a0a0a;--dark:#111111;--dark2:#1a1a1a;--white:#ffffff;--gray:#888888;--lightgray:#cccccc;--bordeaux:#6d1a2a;--bordeaux-light:#8b2236;--bordeaux-glow:rgba(109,26,42,0.28);}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--black);color:var(--white);font-family:'Barlow',sans-serif;overflow-x:hidden;}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:22px 48px;background:rgba(10,10,10,0.95);backdrop-filter:blur(12px);border-bottom:1px solid rgba(255,255,255,0.07);}
+.nav-logo{font-family:'Bebas Neue',sans-serif;font-size:21px;letter-spacing:3px;color:var(--white);text-decoration:none;}
+.nav-logo span{color:var(--gray);}
+.nav-links{display:flex;gap:28px;list-style:none;}
+.nav-links a{color:var(--lightgray);text-decoration:none;font-size:11px;letter-spacing:2px;text-transform:uppercase;font-weight:500;position:relative;transition:color .3s;}
+.nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:1px;background:var(--bordeaux);transition:width .3s;}
+.nav-links a:hover{color:var(--white);}
+.nav-links a:hover::after{width:100%;}
+.nav-cta{background:var(--bordeaux);color:var(--white);padding:11px 24px;font-size:11px;letter-spacing:2px;text-transform:uppercase;font-weight:700;text-decoration:none;transition:background .3s;}
+.nav-cta:hover{background:var(--bordeaux-light);}
+
+/* PAGE HERO */
+.page-hero{padding:160px 48px 80px;border-bottom:1px solid rgba(255,255,255,0.06);}
+.eyebrow{font-size:11px;letter-spacing:4px;text-transform:uppercase;color:var(--bordeaux-light);margin-bottom:20px;animation:fadeUp .7s .2s both;}
+.page-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(72px,10vw,140px);line-height:.9;animation:fadeUp .8s .4s both;}
+.page-title .outline{-webkit-text-stroke:1px rgba(255,255,255,0.2);color:transparent;}
+.page-sub{font-size:16px;color:var(--lightgray);line-height:1.8;margin-top:28px;max-width:560px;animation:fadeUp .7s .6s both;}
+
+/* STATS BAR */
+.stats-bar{background:var(--dark);padding:40px 48px;display:flex;gap:0;border-bottom:1px solid rgba(255,255,255,0.06);}
+.stat-item{flex:1;text-align:center;border-right:1px solid rgba(255,255,255,0.06);}
+.stat-item:last-child{border-right:none;}
+.stat-number{font-family:'Bebas Neue',sans-serif;font-size:56px;line-height:1;}
+.stat-plus{color:var(--bordeaux-light);}
+.stat-label{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--gray);margin-top:4px;}
+
+/* ============================================================
+   BEFORE / AFTER SLIDER SECTION
+   ============================================================ */
+.slider-section{padding:100px 48px;background:var(--dark);}
+.section-tag{font-size:11px;letter-spacing:4px;text-transform:uppercase;color:var(--gray);margin-bottom:16px;}
+.section-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(48px,6vw,80px);line-height:1;margin-bottom:60px;}
+.slider-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:40px;}
+
+/* THE SLIDER WIDGET */
+.ba-slider{position:relative;overflow:hidden;cursor:ew-resize;user-select:none;border:1px solid rgba(255,255,255,0.08);}
+.ba-slider-inner{position:relative;width:100%;height:460px;}
+
+/* AFTER image (bottom layer, full width) */
+.ba-after{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
+
+/* BEFORE image (top layer, clipped by JS) */
+.ba-before-wrap{position:absolute;inset:0;overflow:hidden;}
+.ba-before{width:100%;height:100%;object-fit:cover;display:block;}
+
+/*
+============================================================
+📸 WIE DU BILDER EINFÜGST:
+============================================================
+Jeder Slider hat zwei Bilder: VORHER und NACHHER.
+
+Im HTML weiter unten siehst du für jeden Klienten:
+  <img class="ba-after"  src="..." alt="After">   ← NACHHER-Foto
+  <img class="ba-before" src="..." alt="Before">  ← VORHER-Foto
+
+Ersetze die Unsplash-URLs mit deinen eigenen Pfaden, z.B.:
+  src="images/client1-after.jpg"
+  src="images/client1-before.jpg"
+
+Tipp: Fotos am besten gleich groß und gleich ausgerichtet machen
+(z.B. beide stehend, gleicher Hintergrund) damit der Slider gut aussieht.
+============================================================
+*/
+
+/* Handle line + button */
+.ba-handle{position:absolute;top:0;bottom:0;left:50%;transform:translateX(-50%);width:2px;background:var(--white);z-index:10;cursor:ew-resize;}
+.ba-btn{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:44px;height:44px;background:var(--white);border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(0,0,0,0.4);transition:transform .2s;}
+.ba-handle:hover .ba-btn{transform:translate(-50%,-50%) scale(1.1);}
+.ba-btn svg{width:20px;height:20px;fill:var(--black);}
+
+/* Labels BEFORE / AFTER */
+.ba-label{position:absolute;bottom:16px;font-size:10px;letter-spacing:3px;text-transform:uppercase;font-weight:700;padding:6px 12px;z-index:5;}
+.ba-label-before{left:16px;background:rgba(0,0,0,0.6);color:var(--white);}
+.ba-label-after{right:16px;background:var(--bordeaux);color:var(--white);}
+
+/* Client info below slider */
+.ba-info{padding:20px 0 0;}
+.ba-client-name{font-family:'Barlow Condensed',sans-serif;font-size:20px;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;}
+.ba-client-stats{display:flex;gap:24px;}
+.ba-stat{font-size:12px;color:var(--gray);letter-spacing:1px;}
+.ba-stat strong{color:var(--bordeaux-light);font-weight:600;}
+
+/* ============================================================
+   RESULTS GALLERY SECTION
+   (Einzelfotos — keine Slider)
+   ============================================================ */
+.gallery-section{padding:100px 48px;}
+.gallery-note{font-size:13px;color:var(--gray);margin-bottom:48px;line-height:1.7;max-width:600px;border-left:2px solid var(--bordeaux);padding-left:20px;}
+.gallery-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:4px;}
+.gallery-item{position:relative;overflow:hidden;cursor:pointer;}
+.gallery-item img{width:100%;height:280px;object-fit:cover;display:block;transition:transform .5s,filter .4s;}
+.gallery-item:hover img{transform:scale(1.06);filter:brightness(.6);}
+.gallery-overlay{position:absolute;inset:0;display:flex;align-items:flex-end;padding:16px;opacity:0;transition:opacity .3s;}
+.gallery-item:hover .gallery-overlay{opacity:1;}
+.gallery-overlay-text{font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:1px;border-left:2px solid var(--bordeaux);padding-left:8px;}
+
+/* EMPTY SLOT — shown when no image yet */
+.gallery-item.empty{background:var(--dark);border:1px dashed rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;height:280px;cursor:default;}
+.empty-label{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.15);text-align:center;}
+
+/* TESTIMONIALS */
+.testimonials-section{padding:100px 48px;background:var(--dark);}
+.testimonials-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-top:60px;}
+.testimonial-card{background:var(--black);padding:40px 32px;position:relative;}
+.testimonial-card::before{content:'"';font-family:'Bebas Neue',sans-serif;font-size:120px;line-height:.8;color:var(--bordeaux);opacity:.15;position:absolute;top:20px;left:24px;}
+.testimonial-text{font-size:14px;color:var(--lightgray);line-height:1.9;margin-bottom:32px;position:relative;z-index:1;}
+.testimonial-meta{display:flex;align-items:center;gap:16px;border-top:1px solid rgba(255,255,255,0.06);padding-top:20px;}
+.testimonial-avatar{width:44px;height:44px;border-radius:50%;object-fit:cover;background:var(--dark2);}
+.testimonial-name{font-family:'Barlow Condensed',sans-serif;font-size:16px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;}
+.testimonial-plan{font-size:11px;color:var(--bordeaux-light);letter-spacing:2px;text-transform:uppercase;}
+
+/* Placeholder avatar when no photo */
+.avatar-placeholder{width:44px;height:44px;border-radius:50%;background:var(--bordeaux);display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;font-size:20px;flex-shrink:0;}
+
+/* CTA */
+.trans-cta{background:var(--bordeaux);padding:80px 48px;text-align:center;}
+.trans-cta h2{font-family:'Bebas Neue',sans-serif;font-size:clamp(48px,7vw,100px);line-height:.9;margin-bottom:24px;}
+.trans-cta p{font-size:15px;color:rgba(255,255,255,0.8);max-width:480px;margin:0 auto 40px;line-height:1.8;}
+.btn-white{background:var(--white);color:var(--black);padding:18px 44px;font-size:12px;letter-spacing:2px;text-transform:uppercase;font-weight:700;text-decoration:none;display:inline-block;transition:transform .2s,background .3s;}
+.btn-white:hover{background:var(--lightgray);transform:translateY(-2px);}
+
+footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);padding:60px 48px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:24px;}
+.footer-logo{font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:4px;}
+.footer-social{display:flex;gap:24px;}
+.footer-social a{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--gray);text-decoration:none;transition:color .3s;}
+.footer-social a:hover{color:var(--bordeaux-light);}
+.footer-copy{font-size:12px;color:rgba(255,255,255,0.2);}
+.wa-btn{position:fixed;bottom:32px;right:32px;width:56px;height:56px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;text-decoration:none;z-index:500;box-shadow:0 4px 24px rgba(37,211,102,0.3);transition:transform .3s;}
+.wa-btn:hover{transform:scale(1.12);}
+.wa-btn svg{width:28px;height:28px;fill:white;}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+
+@media(max-width:900px){
+  nav{padding:18px 24px;}
+  .nav-links{display:none;}
+  .page-hero,.slider-section,.gallery-section,.testimonials-section,.trans-cta{padding-left:24px;padding-right:24px;}
+  .stats-bar{flex-direction:column;gap:24px;align-items:center;padding:32px 24px;}
+  .stat-item{border-right:none;border-bottom:1px solid rgba(255,255,255,0.06);padding-bottom:16px;width:100%;}
+  .slider-grid{grid-template-columns:1fr;}
+  .gallery-grid{grid-template-columns:repeat(2,1fr);}
+  .testimonials-grid{grid-template-columns:1fr;}
+  footer{flex-direction:column;padding:48px 24px;}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">MOHAMED <span>SOBHY</span></a>
+  <ul class="nav-links">
+    <li><a href="index.html#plans">Plans</a></li>
+    <li><a href="index.html#training">Training</a></li>
+    <li><a href="story.html">His Story</a></li>
+    <li><a href="certs.html">Certifications</a></li>
+    <li><a href="transformations.html">Transformations</a></li>
+    <li><a href="index.html#contact">Contact</a></li>
+  </ul>
+  <a href="index.html#contact" class="nav-cta">Book Now</a>
+</nav>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="eyebrow">Real People · Real Results</div>
+  <h1 class="page-title">CLIENT<br><span class="outline">RESULTS</span></h1>
+  <p class="page-sub">Every transformation here is the result of consistency, a personalized plan, and Mohamed's hands-on coaching. No filters. No tricks. Just real results.</p>
+</div>
+
+<!-- STATS BAR -->
+<div class="stats-bar">
+  <div class="stat-item">
+    <div class="stat-number">200<span class="stat-plus">+</span></div>
+    <div class="stat-label">Clients Transformed</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-number">5<span class="stat-plus">+</span></div>
+    <div class="stat-label">Years of Results</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-number">3</div>
+    <div class="stat-label">Programs</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-number">100<span class="stat-plus">%</span></div>
+    <div class="stat-label">Personalized Plans</div>
+  </div>
+</div>
+
+<!-- BEFORE / AFTER SLIDERS -->
+<div class="slider-section">
+  <div class="section-tag">Transformations</div>
+  <div class="section-title">BEFORE & AFTER</div>
+
+  <div class="slider-grid">
+
+    <!-- SLIDER 1 -->
+    <!--
+    ============================================================
+    📸 KLIENT 1 — BILDER EINFÜGEN:
+    ba-after  → NACHHER-Foto  (z.B. src="images/client1-after.jpg")
+    ba-before → VORHER-Foto   (z.B. src="images/client1-before.jpg")
+    ============================================================
+    -->
+    <div>
+      <div class="ba-slider" data-slider>
+        <div class="ba-slider-inner">
+          <img class="ba-after" src="https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=600&q=80" alt="After">
+          <div class="ba-before-wrap" style="width:50%">
+            <img class="ba-before" src="https://images.unsplash.com/photo-1547592180-85f173990554?w=600&q=80" alt="Before">
+          </div>
+          <div class="ba-handle" style="left:50%">
+            <div class="ba-btn">
+              <svg viewBox="0 0 24 24"><path d="M8 7l-5 5 5 5M16 7l5 5-5 5"/><path stroke="currentColor" stroke-width="2" fill="none" d="M3 12h18"/></svg>
+            </div>
+          </div>
+          <span class="ba-label ba-label-before">Before</span>
+          <span class="ba-label ba-label-after">After</span>
+        </div>
+      </div>
+      <div class="ba-info">
+        <div class="ba-client-name">Client 1 — Weight Loss</div>
+        <div class="ba-client-stats">
+          <div class="ba-stat">Duration: <strong>3 Months</strong></div>
+          <div class="ba-stat">Plan: <strong>Premium</strong></div>
+          <div class="ba-stat">Result: <strong>–15 kg</strong></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDER 2 -->
+    <!--
+    📸 KLIENT 2 — BILDER EINFÜGEN
+    -->
+    <div>
+      <div class="ba-slider" data-slider>
+        <div class="ba-slider-inner">
+          <img class="ba-after" src="https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?w=600&q=80" alt="After">
+          <div class="ba-before-wrap" style="width:50%">
+            <img class="ba-before" src="https://images.unsplash.com/photo-1599058917212-d750089bc07e?w=600&q=80" alt="Before">
+          </div>
+          <div class="ba-handle" style="left:50%">
+            <div class="ba-btn">
+              <svg viewBox="0 0 24 24"><path d="M8 7l-5 5 5 5M16 7l5 5-5 5"/><path stroke="currentColor" stroke-width="2" fill="none" d="M3 12h18"/></svg>
+            </div>
+          </div>
+          <span class="ba-label ba-label-before">Before</span>
+          <span class="ba-label ba-label-after">After</span>
+        </div>
+      </div>
+      <div class="ba-info">
+        <div class="ba-client-name">Client 2 — Muscle Gain</div>
+        <div class="ba-client-stats">
+          <div class="ba-stat">Duration: <strong>3 Months</strong></div>
+          <div class="ba-stat">Plan: <strong>Standard</strong></div>
+          <div class="ba-stat">Result: <strong>+8 kg muscle</strong></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDER 3 -->
+    <!--
+    📸 KLIENT 3 — BILDER EINFÜGEN
+    -->
+    <div>
+      <div class="ba-slider" data-slider>
+        <div class="ba-slider-inner">
+          <img class="ba-after" src="https://images.unsplash.com/photo-1526506118085-60ce8714f8c5?w=600&q=80" alt="After">
+          <div class="ba-before-wrap" style="width:50%">
+            <img class="ba-before" src="https://images.unsplash.com/photo-1611689342806-0863700ce1e4?w=600&q=80" alt="Before">
+          </div>
+          <div class="ba-handle" style="left:50%">
+            <div class="ba-btn">
+              <svg viewBox="0 0 24 24"><path d="M8 7l-5 5 5 5M16 7l5 5-5 5"/><path stroke="currentColor" stroke-width="2" fill="none" d="M3 12h18"/></svg>
+            </div>
+          </div>
+          <span class="ba-label ba-label-before">Before</span>
+          <span class="ba-label ba-label-after">After</span>
+        </div>
+      </div>
+      <div class="ba-info">
+        <div class="ba-client-name">Client 3 — Body Recomposition</div>
+        <div class="ba-client-stats">
+          <div class="ba-stat">Duration: <strong>3 Months</strong></div>
+          <div class="ba-stat">Plan: <strong>Premium</strong></div>
+          <div class="ba-stat">Result: <strong>Full Recomp</strong></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDER 4 -->
+    <!--
+    📸 KLIENT 4 — BILDER EINFÜGEN
+    -->
+    <div>
+      <div class="ba-slider" data-slider>
+        <div class="ba-slider-inner">
+          <img class="ba-after" src="https://images.unsplash.com/photo-1597452485669-2c7bb5fef90d?w=600&q=80" alt="After">
+          <div class="ba-before-wrap" style="width:50%">
+            <img class="ba-before" src="https://images.unsplash.com/photo-1541534741688-6078c6bfb5c5?w=600&q=80" alt="Before">
+          </div>
+          <div class="ba-handle" style="left:50%">
+            <div class="ba-btn">
+              <svg viewBox="0 0 24 24"><path d="M8 7l-5 5 5 5M16 7l5 5-5 5"/><path stroke="currentColor" stroke-width="2" fill="none" d="M3 12h18"/></svg>
+            </div>
+          </div>
+          <span class="ba-label ba-label-before">Before</span>
+          <span class="ba-label ba-label-after">After</span>
+        </div>
+      </div>
+      <div class="ba-info">
+        <div class="ba-client-name">Client 4 — Fat Loss</div>
+        <div class="ba-client-stats">
+          <div class="ba-stat">Duration: <strong>3 Months</strong></div>
+          <div class="ba-stat">Plan: <strong>Basic</strong></div>
+          <div class="ba-stat">Result: <strong>–10 kg</strong></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- GALLERY -->
+<div class="gallery-section">
+  <div class="section-tag">More Results</div>
+  <div class="section-title">GALLERY</div>
+  <div class="gallery-note">
+    <!--
+    📸 GALERIE-BILDER EINFÜGEN:
+    Ersetze die Unsplash-URLs in den <img>-Tags unten mit
+    deinen eigenen Fotos. Beispiel: src="images/result-5.jpg"
+    Die leeren Slots (class="empty") kannst du mit Fotos füllen
+    indem du das <div class="gallery-item empty"> durch ein
+    normales <div class="gallery-item"> mit einem <img> ersetzt.
+    -->
+    Add more client result photos here. Replace the placeholder images with real client photos for maximum impact.
+  </div>
+  <div class="gallery-grid">
+    <div class="gallery-item">
+      <!-- 📸 FOTO HIER: src="images/result-1.jpg" -->
+      <img src="https://static.wixstatic.com/media/558dad_f51aaf868aa3426388286ac6a0df616f~mv2.jpg" alt="Result">
+      <div class="gallery-overlay"><div class="gallery-overlay-text">Results</div></div>
+    </div>
+    <div class="gallery-item">
+      <!-- 📸 FOTO HIER -->
+      <img src="https://static.wixstatic.com/media/558dad_e92c1aa4e5b9407981135883969e3f33~mv2.jpeg" alt="Result">
+      <div class="gallery-overlay"><div class="gallery-overlay-text">Training</div></div>
+    </div>
+    <div class="gallery-item">
+      <!-- 📸 FOTO HIER -->
+      <img src="https://static.wixstatic.com/media/558dad_506cb87c95704a0d8a4e94b2b29fab8c~mv2.jpeg" alt="Result">
+      <div class="gallery-overlay"><div class="gallery-overlay-text">Progress</div></div>
+    </div>
+    <div class="gallery-item">
+      <!-- 📸 FOTO HIER -->
+      <img src="https://static.wixstatic.com/media/558dad_40d5e6bbae404e9a8a017854d80a358e~mv2.jpeg" alt="Result">
+      <div class="gallery-overlay"><div class="gallery-overlay-text">Strength</div></div>
+    </div>
+    <div class="gallery-item">
+      <!-- 📸 FOTO HIER -->
+      <img src="https://static.wixstatic.com/media/558dad_b2398ce77f504c7f81246a695cd8cb75~mv2.jpg" alt="Result">
+      <div class="gallery-overlay"><div class="gallery-overlay-text">Coaching</div></div>
+    </div>
+    <div class="gallery-item">
+      <!-- 📸 FOTO HIER -->
+      <img src="https://static.wixstatic.com/media/558dad_a00a0ddee8794c49addf17cc7a72cd4c~mv2.jpg" alt="Result">
+      <div class="gallery-overlay"><div class="gallery-overlay-text">Nutrition</div></div>
+    </div>
+    <!-- Leere Slots — füge hier mehr Bilder ein wenn du welche hast -->
+    <div class="gallery-item empty">
+      <div class="empty-label">Add<br>Photo</div>
+    </div>
+    <div class="gallery-item empty">
+      <div class="empty-label">Add<br>Photo</div>
+    </div>
+  </div>
+</div>
+
+<!-- TESTIMONIALS -->
+<div class="testimonials-section">
+  <div class="section-tag">What Clients Say</div>
+  <div class="section-title">TESTIMONIALS</div>
+  <div class="testimonials-grid">
+
+    <div class="testimonial-card">
+      <p class="testimonial-text">
+        <!--
+        ✏️ BEWERTUNG BEARBEITEN: Ersetze diesen Text mit echten
+        Aussagen deiner Klienten — z.B. aus WhatsApp-Nachrichten
+        oder Instagram-Kommentaren.
+        -->
+        "Mohamed's program completely transformed my body in just 3 months. His attention to detail, constant support, and perfectly designed plan made all the difference. I've never felt stronger or more confident."
+      </p>
+      <div class="testimonial-meta">
+        <!--
+        📸 KLIENTENFOTO (optional):
+        Ersetze das avatar-placeholder div durch:
+        <img class="testimonial-avatar" src="images/client-sara.jpg" alt="Sara">
+        -->
+        <div class="avatar-placeholder">A</div>
+        <div>
+          <div class="testimonial-name">Ahmed M.</div>
+          <div class="testimonial-plan">Premium Plan · 3 Months</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="testimonial-card">
+      <p class="testimonial-text">
+        "I tried so many trainers before Mohamed — nobody comes close. He actually listens, adjusts the plan weekly, and explains everything. The results speak for themselves. Down 15kg and feeling incredible."
+      </p>
+      <div class="testimonial-meta">
+        <div class="avatar-placeholder">F</div>
+        <div>
+          <div class="testimonial-name">Fatima K.</div>
+          <div class="testimonial-plan">Standard Plan · 3 Months</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="testimonial-card">
+      <p class="testimonial-text">
+        "Online coaching with Mohamed is as effective as being there in person — maybe more. He checks in every week, adjusts everything based on my progress, and is always available when I have questions. Highly recommend."
+      </p>
+      <div class="testimonial-meta">
+        <div class="avatar-placeholder">K</div>
+        <div>
+          <div class="testimonial-name">Khaled R.</div>
+          <div class="testimonial-plan">Online Sessions</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- CTA -->
+<div class="trans-cta">
+  <h2>YOUR TURN.</h2>
+  <p>These are real results from real people. You could be next. Book your program today and start your transformation.</p>
+  <a href="index.html#contact" class="btn-white">Book Now</a>
+</div>
+
+<footer>
+  <div class="footer-logo">MOHAMED SOBHY</div>
+  <div class="footer-social">
+    <a href="http://www.instagram.com" target="_blank">Instagram</a>
+    <a href="http://www.facebook.com" target="_blank">Facebook</a>
+    <a href="http://www.youtube.com" target="_blank">YouTube</a>
+    <a href="http://www.tiktok.com" target="_blank">TikTok</a>
+  </div>
+  <div class="footer-copy">© 2026 Mohamed Sobhy. All rights reserved.</div>
+</footer>
+
+<a href="https://wa.me/201036639605" class="wa-btn" target="_blank">
+  <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.137.563 4.14 1.543 5.874L0 24l6.336-1.519A11.934 11.934 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.006-1.372l-.36-.214-3.726.893.926-3.636-.235-.373A9.818 9.818 0 012.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg>
+</a>
+
+<script>
+// ============================================================
+// BEFORE/AFTER SLIDER LOGIC
+// ============================================================
+document.querySelectorAll('[data-slider]').forEach(slider => {
+  const wrap = slider.querySelector('.ba-before-wrap');
+  const handle = slider.querySelector('.ba-handle');
+  let dragging = false;
+
+  function setPos(x) {
+    const rect = slider.getBoundingClientRect();
+    let pct = ((x - rect.left) / rect.width) * 100;
+    pct = Math.min(95, Math.max(5, pct));
+    wrap.style.width = pct + '%';
+    handle.style.left = pct + '%';
+  }
+
+  slider.addEventListener('mousedown', e => { dragging = true; setPos(e.clientX); });
+  slider.addEventListener('touchstart', e => { dragging = true; setPos(e.touches[0].clientX); }, {passive:true});
+  window.addEventListener('mousemove', e => { if(dragging) setPos(e.clientX); });
+  window.addEventListener('touchmove', e => { if(dragging) setPos(e.touches[0].clientX); }, {passive:true});
+  window.addEventListener('mouseup', () => dragging = false);
+  window.addEventListener('touchend', () => dragging = false);
+});
+
+// Animate gallery items
+const galleryItems = document.querySelectorAll('.gallery-item');
+const obs = new IntersectionObserver(entries => {
+  entries.forEach((e, idx) => {
+    if(e.isIntersecting) {
+      setTimeout(() => {
+        e.target.style.opacity = '1';
+        e.target.style.transform = 'translateY(0)';
+      }, (Array.from(galleryItems).indexOf(e.target) % 4) * 80);
+    }
+  });
+}, {threshold: 0.1});
+galleryItems.forEach(item => {
+  item.style.opacity = '0';
+  item.style.transform = 'translateY(20px)';
+  item.style.transition = 'opacity .5s, transform .5s';
+  obs.observe(item);
+});
+</script>
+</body>
+</html>

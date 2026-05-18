@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>His Story | Mohamed Sobhy</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@300;400;500;600;700&family=Barlow+Condensed:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--black:#0a0a0a;--dark:#111111;--dark2:#1a1a1a;--white:#ffffff;--gray:#888888;--lightgray:#cccccc;--bordeaux:#6d1a2a;--bordeaux-light:#8b2236;--bordeaux-glow:rgba(109,26,42,0.28);}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--black);color:var(--white);font-family:'Barlow',sans-serif;overflow-x:hidden;}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:22px 48px;background:rgba(10,10,10,0.95);backdrop-filter:blur(12px);border-bottom:1px solid rgba(255,255,255,0.07);}
+.nav-logo{font-family:'Bebas Neue',sans-serif;font-size:21px;letter-spacing:3px;color:var(--white);text-decoration:none;}
+.nav-logo span{color:var(--gray);}
+.nav-links{display:flex;gap:28px;list-style:none;}
+.nav-links a{color:var(--lightgray);text-decoration:none;font-size:11px;letter-spacing:2px;text-transform:uppercase;font-weight:500;position:relative;transition:color .3s;}
+.nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:1px;background:var(--bordeaux);transition:width .3s;}
+.nav-links a:hover{color:var(--white);}
+.nav-links a:hover::after{width:100%;}
+.nav-cta{background:var(--bordeaux);color:var(--white);padding:11px 24px;font-size:11px;letter-spacing:2px;text-transform:uppercase;font-weight:700;text-decoration:none;transition:background .3s;}
+.nav-cta:hover{background:var(--bordeaux-light);}
+
+/* HERO */
+.story-hero{padding-top:140px;padding-bottom:80px;padding-left:48px;padding-right:48px;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;min-height:90vh;}
+.story-hero-text .eyebrow{font-size:11px;letter-spacing:4px;text-transform:uppercase;color:var(--bordeaux-light);margin-bottom:20px;}
+.story-hero-text h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(64px,9vw,130px);line-height:.92;margin-bottom:32px;}
+.story-hero-text h1 .outline{-webkit-text-stroke:1px rgba(255,255,255,0.2);color:transparent;}
+.story-hero-text p{font-size:16px;color:var(--lightgray);line-height:1.85;max-width:480px;margin-bottom:40px;}
+.story-hero-img{position:relative;height:620px;}
+.story-hero-img img{width:100%;height:100%;object-fit:cover;display:block;}
+/* 👇 HIER DEIN FOTO EINFÜGEN */
+/* Ersetze die URL unten mit: src="images/mohamed-portrait.jpg" */
+.story-hero-img::after{content:'';position:absolute;inset:0;border:1px solid rgba(255,255,255,0.08);}
+.story-hero-img::before{content:'';position:absolute;bottom:-20px;left:-20px;width:180px;height:180px;border:1px solid var(--bordeaux);z-index:-1;}
+.hero-img-badge{position:absolute;bottom:32px;right:-24px;background:var(--bordeaux);padding:20px 28px;min-width:160px;}
+.hero-img-badge .badge-num{font-family:'Bebas Neue',sans-serif;font-size:48px;line-height:1;}
+.hero-img-badge .badge-label{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.7);}
+
+/* TIMELINE */
+.timeline-section{padding:120px 48px;background:var(--dark);}
+.section-tag{font-size:11px;letter-spacing:4px;text-transform:uppercase;color:var(--gray);margin-bottom:16px;}
+.section-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(48px,6vw,90px);line-height:1;margin-bottom:72px;}
+.timeline{position:relative;max-width:800px;margin:0 auto;}
+.timeline::before{content:'';position:absolute;left:0;top:0;bottom:0;width:1px;background:linear-gradient(to bottom,transparent,var(--bordeaux),transparent);}
+.timeline-item{display:grid;grid-template-columns:80px 1fr;gap:40px;padding:0 0 64px 0;position:relative;opacity:0;transform:translateX(-20px);transition:opacity .6s,transform .6s;}
+.timeline-item.visible{opacity:1;transform:translateX(0);}
+.timeline-year{font-family:'Bebas Neue',sans-serif;font-size:32px;color:var(--bordeaux-light);padding-top:4px;}
+.timeline-dot{position:absolute;left:-5px;top:8px;width:10px;height:10px;background:var(--bordeaux);border-radius:50%;}
+.timeline-content h3{font-family:'Barlow Condensed',sans-serif;font-size:22px;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:10px;}
+.timeline-content p{font-size:14px;color:var(--lightgray);line-height:1.8;}
+
+/* PHILOSOPHY */
+.philosophy-section{padding:120px 48px;}
+.philosophy-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-top:72px;}
+.phil-card{background:var(--dark);padding:48px 36px;position:relative;overflow:hidden;}
+.phil-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--bordeaux);transform:scaleX(0);transition:transform .5s;}
+.phil-card:hover::before{transform:scaleX(1);}
+.phil-num{font-family:'Bebas Neue',sans-serif;font-size:80px;line-height:1;color:rgba(255,255,255,0.04);position:absolute;top:20px;right:20px;}
+.phil-icon{font-size:28px;margin-bottom:20px;}
+.phil-title{font-family:'Barlow Condensed',sans-serif;font-size:22px;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:14px;}
+.phil-desc{font-size:14px;color:var(--lightgray);line-height:1.8;}
+
+/* QUOTE SECTION */
+.quote-section{background:var(--bordeaux);padding:80px 48px;text-align:center;}
+.big-quote{font-family:'Bebas Neue',sans-serif;font-size:clamp(36px,5vw,72px);line-height:1.1;max-width:900px;margin:0 auto 24px;}
+.quote-attr{font-size:12px;letter-spacing:4px;text-transform:uppercase;color:rgba(255,255,255,0.6);}
+
+/* CTA */
+.story-cta{padding:120px 48px;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;background:var(--dark);}
+.cta-links{display:flex;flex-direction:column;gap:2px;}
+.cta-link{display:flex;align-items:center;justify-content:space-between;padding:28px 32px;background:var(--black);text-decoration:none;color:var(--white);transition:background .3s,padding-left .3s;}
+.cta-link:hover{background:var(--dark2);padding-left:44px;}
+.cta-link-left{display:flex;flex-direction:column;gap:4px;}
+.cta-link-tag{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--bordeaux-light);}
+.cta-link-title{font-family:'Barlow Condensed',sans-serif;font-size:24px;font-weight:700;text-transform:uppercase;}
+.cta-arrow{font-size:24px;color:var(--bordeaux);}
+.btn-primary{background:var(--bordeaux);color:var(--white);padding:16px 36px;font-size:12px;letter-spacing:2px;text-transform:uppercase;font-weight:700;text-decoration:none;display:inline-block;transition:background .3s;}
+.btn-primary:hover{background:var(--bordeaux-light);}
+
+/* FOOTER */
+footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);padding:60px 48px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:24px;}
+.footer-logo{font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:4px;}
+.footer-social{display:flex;gap:24px;}
+.footer-social a{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--gray);text-decoration:none;transition:color .3s;}
+.footer-social a:hover{color:var(--bordeaux-light);}
+.footer-copy{font-size:12px;color:rgba(255,255,255,0.2);}
+
+/* WA */
+.wa-btn{position:fixed;bottom:32px;right:32px;width:56px;height:56px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;text-decoration:none;z-index:500;box-shadow:0 4px 24px rgba(37,211,102,0.3);transition:transform .3s;}
+.wa-btn:hover{transform:scale(1.12);}
+.wa-btn svg{width:28px;height:28px;fill:white;}
+
+@media(max-width:900px){
+  nav{padding:18px 24px;}
+  .nav-links{display:none;}
+  .story-hero,.story-cta{grid-template-columns:1fr;padding:100px 24px 60px;}
+  .story-hero-img{height:400px;}
+  .hero-img-badge{right:16px;}
+  .timeline-section,.philosophy-section{padding:80px 24px;}
+  .philosophy-grid{grid-template-columns:1fr;}
+  .quote-section{padding:60px 24px;}
+  footer{flex-direction:column;padding:48px 24px;}
+}
+
+/* Entrance animation */
+@keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+.story-hero-text>*{animation:fadeUp .8s both;}
+.story-hero-text .eyebrow{animation-delay:.2s;}
+.story-hero-text h1{animation-delay:.4s;}
+.story-hero-text p{animation-delay:.6s;}
+.story-hero-text a{animation-delay:.8s;}
+.story-hero-img{animation:fadeUp .9s .5s both;}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">MOHAMED <span>SOBHY</span></a>
+  <ul class="nav-links">
+    <li><a href="index.html#plans">Plans</a></li>
+    <li><a href="index.html#training">Training</a></li>
+    <li><a href="story.html">His Story</a></li>
+    <li><a href="certs.html">Certifications</a></li>
+    <li><a href="transformations.html">Transformations</a></li>
+    <li><a href="index.html#contact">Contact</a></li>
+  </ul>
+  <a href="index.html#contact" class="nav-cta">Book Now</a>
+</nav>
+
+<!-- HERO -->
+<div class="story-hero">
+  <div class="story-hero-text">
+    <div class="eyebrow">Personal Trainer · Coach · Egypt</div>
+    <h1>WHO IS<br>MOHAMED<br><span class="outline">SOBHY?</span></h1>
+    <p>From his first gym session to becoming a certified performance coach with 8 elite certifications — this is the story of relentless dedication to the craft of transformation.</p>
+    <a href="index.html#contact" class="btn-primary">Train With Mohamed</a>
+  </div>
+  <div class="story-hero-img">
+    <!--
+    ============================================================
+    👇 DEIN FOTO HIER EINFÜGEN
+    Ersetze die URL unten mit dem Pfad zu Mohammeds Foto.
+    Beispiel: src="images/mohamed-portrait.jpg"
+    ============================================================
+    -->
+    <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800&q=80" alt="Mohamed Sobhy">
+    <div class="hero-img-badge">
+      <div class="badge-num">5+</div>
+      <div class="badge-label">Years of Excellence</div>
+    </div>
+  </div>
+</div>
+
+<!-- TIMELINE -->
+<div class="timeline-section">
+  <div class="section-tag">The Journey</div>
+  <div class="section-title">HIS STORY</div>
+  <div class="timeline">
+
+    <div class="timeline-item">
+      <div class="timeline-year">2018</div>
+      <div>
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <h3>The Beginning</h3>
+          <p>Mohamed took his first serious steps into the world of fitness — not just as a hobby, but as a calling. What started as personal training became an obsession with understanding the science of human performance.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-year">2019</div>
+      <div>
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <h3>First Certifications</h3>
+          <p>Pursued his first official certifications, diving deep into anatomy, biomechanics, and exercise physiology. Every certificate earned through hard study and real-world application — never shortcuts.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-year">2020</div>
+      <div>
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <h3>Online Coaching Begins</h3>
+          <p>Expanded his reach beyond the gym walls. During a challenging year for the world, Mohamed built systems to coach clients remotely with the same precision as in-person sessions.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-year">2021</div>
+      <div>
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <h3>IFAA Germany Certification</h3>
+          <p>Earned one of his most prestigious certifications from IFAA Germany, cementing his place among internationally recognized fitness professionals. The standard was high. He exceeded it.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-year">2022</div>
+      <div>
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <h3>200+ Clients Milestone</h3>
+          <p>Crossed the milestone of 200+ clients trained — each one a story of transformation. From weight loss to athletic performance, the methodology proven across every body type and goal.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-year">2024</div>
+      <div>
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <h3>8 Elite Certifications</h3>
+          <p>With certifications from IFAA Germany, IASST, ICG and more, Mohamed now holds 8 internationally recognized credentials — a rare achievement representing thousands of hours of study and practice.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-year">NOW</div>
+      <div>
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <h3>Your Turn</h3>
+          <p>The story continues — with you. Mohamed is actively coaching clients worldwide, delivering results through personalized programs, precision nutrition, and relentless support.</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- PHILOSOPHY -->
+<div class="philosophy-section">
+  <div class="section-tag">How He Trains</div>
+  <div class="section-title">THE PHILOSOPHY</div>
+  <div class="philosophy-grid">
+    <div class="phil-card">
+      <div class="phil-num">01</div>
+      <div class="phil-icon">⚡</div>
+      <div class="phil-title">No Generic Plans</div>
+      <div class="phil-desc">Every program is built from scratch for the individual. Your body, your goals, your schedule — a completely personalized approach, never a copy-paste template.</div>
+    </div>
+    <div class="phil-card">
+      <div class="phil-num">02</div>
+      <div class="phil-icon">🎯</div>
+      <div class="phil-title">Science First</div>
+      <div class="phil-desc">Everything Mohamed prescribes is backed by exercise science and nutritional research. No trends, no gimmicks — only proven methods that produce real, lasting results.</div>
+    </div>
+    <div class="phil-card">
+      <div class="phil-num">03</div>
+      <div class="phil-icon">🔄</div>
+      <div class="phil-title">Constant Adjustment</div>
+      <div class="phil-desc">Progress is tracked, measured, and responded to. Programs are updated continuously — your training evolves with you, never stagnating, always pushing forward.</div>
+    </div>
+  </div>
+</div>
+
+<!-- QUOTE -->
+<div class="quote-section">
+  <div class="big-quote">"THE BODY ACHIEVES WHAT THE MIND BELIEVES — BUT ONLY WITH THE RIGHT PROGRAM."</div>
+  <div class="quote-attr">— Mohamed Sobhy</div>
+</div>
+
+<!-- CTA LINKS -->
+<div class="story-cta">
+  <div>
+    <div class="section-tag">Explore More</div>
+    <div class="section-title">KEEP<br>GOING</div>
+  </div>
+  <div class="cta-links">
+    <a href="certs.html" class="cta-link">
+      <div class="cta-link-left">
+        <span class="cta-link-tag">Credentials</span>
+        <span class="cta-link-title">8 Elite Certifications</span>
+      </div>
+      <span class="cta-arrow">→</span>
+    </a>
+    <a href="transformations.html" class="cta-link">
+      <div class="cta-link-left">
+        <span class="cta-link-tag">Results</span>
+        <span class="cta-link-title">Client Transformations</span>
+      </div>
+      <span class="cta-arrow">→</span>
+    </a>
+    <a href="index.html#plans" class="cta-link">
+      <div class="cta-link-left">
+        <span class="cta-link-tag">Get Started</span>
+        <span class="cta-link-title">View Plans & Pricing</span>
+      </div>
+      <span class="cta-arrow">→</span>
+    </a>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-logo">MOHAMED SOBHY</div>
+  <div class="footer-social">
+    <a href="http://www.instagram.com" target="_blank">Instagram</a>
+    <a href="http://www.facebook.com" target="_blank">Facebook</a>
+    <a href="http://www.youtube.com" target="_blank">YouTube</a>
+    <a href="http://www.tiktok.com" target="_blank">TikTok</a>
+  </div>
+  <div class="footer-copy">© 2026 Mohamed Sobhy. All rights reserved.</div>
+</footer>
+
+<a href="https://wa.me/201036639605" class="wa-btn" target="_blank">
+  <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.137.563 4.14 1.543 5.874L0 24l6.336-1.519A11.934 11.934 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.006-1.372l-.36-.214-3.726.893.926-3.636-.235-.373A9.818 9.818 0 012.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg>
+</a>
+
+<script>
+// Timeline scroll animation
+const items = document.querySelectorAll('.timeline-item');
+const observer = new IntersectionObserver(entries => {
+  entries.forEach((e, i) => {
+    if(e.isIntersecting) {
+      setTimeout(() => e.target.classList.add('visible'), i * 80);
+    }
+  });
+}, {threshold: 0.2});
+items.forEach(item => observer.observe(item));
+</script>
+</body>
+</html>

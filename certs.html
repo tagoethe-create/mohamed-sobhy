@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Certifications | Mohamed Sobhy</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@300;400;500;600;700&family=Barlow+Condensed:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--black:#0a0a0a;--dark:#111111;--dark2:#1a1a1a;--white:#ffffff;--gray:#888888;--lightgray:#cccccc;--bordeaux:#6d1a2a;--bordeaux-light:#8b2236;--bordeaux-glow:rgba(109,26,42,0.28);}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--black);color:var(--white);font-family:'Barlow',sans-serif;overflow-x:hidden;}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:22px 48px;background:rgba(10,10,10,0.95);backdrop-filter:blur(12px);border-bottom:1px solid rgba(255,255,255,0.07);}
+.nav-logo{font-family:'Bebas Neue',sans-serif;font-size:21px;letter-spacing:3px;color:var(--white);text-decoration:none;}
+.nav-logo span{color:var(--gray);}
+.nav-links{display:flex;gap:28px;list-style:none;}
+.nav-links a{color:var(--lightgray);text-decoration:none;font-size:11px;letter-spacing:2px;text-transform:uppercase;font-weight:500;position:relative;transition:color .3s;}
+.nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:1px;background:var(--bordeaux);transition:width .3s;}
+.nav-links a:hover{color:var(--white);}
+.nav-links a:hover::after{width:100%;}
+.nav-cta{background:var(--bordeaux);color:var(--white);padding:11px 24px;font-size:11px;letter-spacing:2px;text-transform:uppercase;font-weight:700;text-decoration:none;transition:background .3s;}
+.nav-cta:hover{background:var(--bordeaux-light);}
+
+/* PAGE HERO */
+.page-hero{padding-top:160px;padding-bottom:80px;padding-left:48px;padding-right:48px;border-bottom:1px solid rgba(255,255,255,0.06);}
+.page-hero-inner{max-width:700px;}
+.eyebrow{font-size:11px;letter-spacing:4px;text-transform:uppercase;color:var(--bordeaux-light);margin-bottom:20px;animation:fadeUp .7s .2s both;}
+.page-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(72px,10vw,140px);line-height:.9;animation:fadeUp .8s .4s both;}
+.page-title .outline{-webkit-text-stroke:1px rgba(255,255,255,0.2);color:transparent;}
+.page-sub{font-size:16px;color:var(--lightgray);line-height:1.8;margin-top:28px;max-width:520px;animation:fadeUp .7s .6s both;}
+
+/* CERT COUNT BANNER */
+.cert-banner{background:var(--bordeaux);padding:40px 48px;display:flex;align-items:center;gap:48px;}
+.cert-banner-num{font-family:'Bebas Neue',sans-serif;font-size:96px;line-height:1;}
+.cert-banner-text h3{font-family:'Bebas Neue',sans-serif;font-size:36px;margin-bottom:6px;}
+.cert-banner-text p{font-size:14px;color:rgba(255,255,255,0.75);max-width:500px;line-height:1.7;}
+
+/* CERTS GRID */
+.certs-section{padding:100px 48px;background:var(--dark);}
+.certs-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:2px;margin-top:60px;}
+.cert-card{background:var(--black);padding:48px 40px;position:relative;overflow:hidden;display:grid;grid-template-columns:80px 1fr;gap:32px;align-items:start;cursor:default;transition:background .3s;}
+.cert-card:hover{background:var(--dark2);}
+.cert-card::after{content:'';position:absolute;left:0;top:0;bottom:0;width:2px;background:var(--bordeaux);transform:scaleY(0);transform-origin:top;transition:transform .4s;}
+.cert-card:hover::after{transform:scaleY(1);}
+.cert-number{font-family:'Bebas Neue',sans-serif;font-size:56px;line-height:1;color:var(--bordeaux-light);}
+.cert-body{}
+.cert-org{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--bordeaux-light);margin-bottom:8px;}
+.cert-name{font-family:'Barlow Condensed',sans-serif;font-size:26px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;margin-bottom:12px;line-height:1.1;}
+.cert-desc{font-size:13px;color:var(--lightgray);line-height:1.75;}
+.cert-tag{display:inline-block;margin-top:16px;background:rgba(109,26,42,0.2);border:1px solid var(--bordeaux);color:var(--bordeaux-light);font-size:10px;letter-spacing:2px;text-transform:uppercase;padding:6px 12px;}
+
+/*
+==============================================================
+📸 ZERTIFIKAT-BILDER EINFÜGEN (OPTIONAL)
+==============================================================
+Falls du Fotos der Zertifikate zeigen möchtest, kannst du
+unterhalb von .cert-tag ein <img> hinzufügen:
+
+<img src="images/cert-ifaa.jpg" alt="IFAA Certificate"
+     style="width:100%;margin-top:20px;opacity:.7;">
+
+Die Bilder werden dann im jeweiligen Zertifikat-Block angezeigt.
+==============================================================
+*/
+
+/* INTERNATIONAL BADGE SECTION */
+.intl-section{padding:80px 48px;text-align:center;border-top:1px solid rgba(255,255,255,0.06);}
+.intl-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(40px,5vw,72px);margin-bottom:16px;}
+.intl-sub{font-size:15px;color:var(--lightgray);max-width:560px;margin:0 auto 60px;line-height:1.8;}
+.intl-logos{display:flex;flex-wrap:wrap;justify-content:center;gap:0;}
+.intl-logo-item{padding:28px 48px;border:1px solid rgba(255,255,255,0.06);text-align:center;min-width:180px;}
+.intl-logo-item:hover{background:var(--dark);}
+.intl-logo-name{font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:2px;}
+.intl-logo-country{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--gray);margin-top:4px;}
+
+/* CTA */
+.certs-cta{padding:100px 48px;background:var(--dark2);display:grid;grid-template-columns:1fr auto;gap:40px;align-items:center;}
+.certs-cta h2{font-family:'Bebas Neue',sans-serif;font-size:clamp(40px,5vw,72px);line-height:1;}
+.certs-cta p{font-size:15px;color:var(--lightgray);margin-top:12px;max-width:500px;line-height:1.7;}
+.btn-primary{background:var(--bordeaux);color:var(--white);padding:18px 44px;font-size:12px;letter-spacing:2px;text-transform:uppercase;font-weight:700;text-decoration:none;display:inline-block;transition:background .3s;}
+.btn-primary:hover{background:var(--bordeaux-light);}
+
+footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);padding:60px 48px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:24px;}
+.footer-logo{font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:4px;}
+.footer-social{display:flex;gap:24px;}
+.footer-social a{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--gray);text-decoration:none;transition:color .3s;}
+.footer-social a:hover{color:var(--bordeaux-light);}
+.footer-copy{font-size:12px;color:rgba(255,255,255,0.2);}
+.wa-btn{position:fixed;bottom:32px;right:32px;width:56px;height:56px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;text-decoration:none;z-index:500;box-shadow:0 4px 24px rgba(37,211,102,0.3);transition:transform .3s;}
+.wa-btn:hover{transform:scale(1.12);}
+.wa-btn svg{width:28px;height:28px;fill:white;}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+.cert-card{opacity:0;transform:translateY(20px);transition:opacity .5s,transform .5s,background .3s;}
+.cert-card.visible{opacity:1;transform:translateY(0);}
+
+@media(max-width:900px){
+  nav{padding:18px 24px;}
+  .nav-links{display:none;}
+  .page-hero,.certs-section,.intl-section,.certs-cta{padding-left:24px;padding-right:24px;}
+  .cert-banner{padding:32px 24px;flex-direction:column;gap:16px;align-items:flex-start;}
+  .certs-grid{grid-template-columns:1fr;}
+  .certs-cta{grid-template-columns:1fr;}
+  footer{flex-direction:column;padding:48px 24px;}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">MOHAMED <span>SOBHY</span></a>
+  <ul class="nav-links">
+    <li><a href="index.html#plans">Plans</a></li>
+    <li><a href="index.html#training">Training</a></li>
+    <li><a href="story.html">His Story</a></li>
+    <li><a href="certs.html">Certifications</a></li>
+    <li><a href="transformations.html">Transformations</a></li>
+    <li><a href="index.html#contact">Contact</a></li>
+  </ul>
+  <a href="index.html#contact" class="nav-cta">Book Now</a>
+</nav>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="page-hero-inner">
+    <div class="eyebrow">Professional Credentials</div>
+    <h1 class="page-title">8 ELITE<br><span class="outline">CERTS</span></h1>
+    <p class="page-sub">Internationally recognized certifications earned through years of dedicated study. Every credential represents thousands of hours of learning, testing, and real-world application.</p>
+  </div>
+</div>
+
+<!-- BANNER -->
+<div class="cert-banner">
+  <div class="cert-banner-num">8</div>
+  <div class="cert-banner-text">
+    <h3>International Certifications</h3>
+    <p>From Germany to Egypt, Mohamed's credentials are recognized worldwide. Each certification required rigorous examination and practical assessment — no shortcuts, no exceptions.</p>
+  </div>
+</div>
+
+<!-- CERTS GRID -->
+<div class="certs-section">
+  <div style="font-size:11px;letter-spacing:4px;text-transform:uppercase;color:var(--gray);margin-bottom:16px;">All Credentials</div>
+  <div style="font-family:'Bebas Neue',sans-serif;font-size:clamp(48px,6vw,80px);line-height:1;">CERTIFICATIONS</div>
+
+  <div class="certs-grid">
+
+    <div class="cert-card">
+      <div class="cert-number">01</div>
+      <div class="cert-body">
+        <div class="cert-org">IFAA Germany</div>
+        <div class="cert-name">International Fitness & Aerobics Academy</div>
+        <div class="cert-desc">One of Europe's most prestigious fitness certifications. Covers advanced training methodology, anatomy, physiology, and program design to international standards.</div>
+        <div class="cert-tag">Germany · International</div>
+        <!--
+        ========================================================
+        📸 BILD DES ZERTIFIKATS HIER EINFÜGEN (optional):
+        <img src="images/cert-ifaa.jpg" alt="IFAA Certificate"
+             style="width:100%;margin-top:20px;border:1px solid rgba(255,255,255,0.08);">
+        ========================================================
+        -->
+      </div>
+    </div>
+
+    <div class="cert-card">
+      <div class="cert-number">02</div>
+      <div class="cert-body">
+        <div class="cert-org">IASST</div>
+        <div class="cert-name">International Academy of Sports Science & Technology</div>
+        <div class="cert-desc">Advanced sports science certification covering biomechanics, performance optimization, and evidence-based training techniques for elite-level coaching.</div>
+        <div class="cert-tag">International</div>
+      </div>
+    </div>
+
+    <div class="cert-card">
+      <div class="cert-number">03</div>
+      <div class="cert-body">
+        <div class="cert-org">ICG</div>
+        <div class="cert-name">Indoor Cycling Group Certification</div>
+        <div class="cert-desc">Specialized certification in indoor cycling and cardio conditioning. Internationally recognized by fitness professionals across 40+ countries.</div>
+        <div class="cert-tag">International · Cardio</div>
+      </div>
+    </div>
+
+    <div class="cert-card">
+      <div class="cert-number">04</div>
+      <div class="cert-body">
+        <div class="cert-org">Nutrition Certification</div>
+        <div class="cert-name">Sports Nutrition & Meal Planning</div>
+        <div class="cert-desc">Comprehensive nutrition certification covering macronutrient optimization, meal timing, supplementation science, and body composition management.</div>
+        <div class="cert-tag">Nutrition · Performance</div>
+      </div>
+    </div>
+
+    <div class="cert-card">
+      <div class="cert-number">05</div>
+      <div class="cert-body">
+        <div class="cert-org">Personal Training</div>
+        <div class="cert-name">Certified Personal Trainer (CPT)</div>
+        <div class="cert-desc">Foundation certification in personal training methodology, covering client assessment, program design, and periodization principles for all fitness levels.</div>
+        <div class="cert-tag">Personal Training</div>
+      </div>
+    </div>
+
+    <div class="cert-card">
+      <div class="cert-number">06</div>
+      <div class="cert-body">
+        <div class="cert-org">Pilates</div>
+        <div class="cert-name">Pilates Instructor Certification</div>
+        <div class="cert-desc">Professional Pilates instruction certification covering mat and reformer work, postural correction, core stability, and therapeutic applications.</div>
+        <div class="cert-tag">Mind & Body · Flexibility</div>
+      </div>
+    </div>
+
+    <div class="cert-card">
+      <div class="cert-number">07</div>
+      <div class="cert-body">
+        <div class="cert-org">Functional Training</div>
+        <div class="cert-name">Functional Movement Specialist</div>
+        <div class="cert-desc">Specialized in functional movement patterns, corrective exercise, and movement screening to optimize performance and reduce injury risk in everyday athletes.</div>
+        <div class="cert-tag">Movement · Functional</div>
+      </div>
+    </div>
+
+    <div class="cert-card">
+      <div class="cert-number">08</div>
+      <div class="cert-body">
+        <div class="cert-org">Body Transformation</div>
+        <div class="cert-name">Body Composition & Transformation Coach</div>
+        <div class="cert-desc">Advanced certification in body recomposition combining training, nutrition, recovery, and lifestyle coaching for complete physique transformation results.</div>
+        <div class="cert-tag">Transformation · Advanced</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- INTERNATIONAL LOGOS -->
+<div class="intl-section">
+  <div class="intl-title">INTERNATIONALLY RECOGNIZED</div>
+  <p class="intl-sub">Mohamed's certifications are issued and recognized by leading organizations across Europe, the Middle East, and beyond.</p>
+  <div class="intl-logos">
+    <div class="intl-logo-item"><div class="intl-logo-name">IFAA</div><div class="intl-logo-country">Germany</div></div>
+    <div class="intl-logo-item"><div class="intl-logo-name">IASST</div><div class="intl-logo-country">International</div></div>
+    <div class="intl-logo-item"><div class="intl-logo-name">ICG</div><div class="intl-logo-country">International</div></div>
+    <div class="intl-logo-item"><div class="intl-logo-name">CPT</div><div class="intl-logo-country">Certified</div></div>
+  </div>
+</div>
+
+<!-- CTA -->
+<div class="certs-cta">
+  <div>
+    <h2>READY TO TRAIN<br>WITH THE BEST?</h2>
+    <p>8 certifications. 200+ clients. 5+ years of proven results. Your transformation starts with one message.</p>
+  </div>
+  <a href="index.html#contact" class="btn-primary">Book Now</a>
+</div>
+
+<footer>
+  <div class="footer-logo">MOHAMED SOBHY</div>
+  <div class="footer-social">
+    <a href="http://www.instagram.com" target="_blank">Instagram</a>
+    <a href="http://www.facebook.com" target="_blank">Facebook</a>
+    <a href="http://www.youtube.com" target="_blank">YouTube</a>
+    <a href="http://www.tiktok.com" target="_blank">TikTok</a>
+  </div>
+  <div class="footer-copy">© 2026 Mohamed Sobhy. All rights reserved.</div>
+</footer>
+
+<a href="https://wa.me/201036639605" class="wa-btn" target="_blank">
+  <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.137.563 4.14 1.543 5.874L0 24l6.336-1.519A11.934 11.934 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.006-1.372l-.36-.214-3.726.893.926-3.636-.235-.373A9.818 9.818 0 012.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg>
+</a>
+
+<script>
+const cards = document.querySelectorAll('.cert-card');
+const obs = new IntersectionObserver(entries => {
+  entries.forEach((e, i) => {
+    if(e.isIntersecting) {
+      setTimeout(() => e.target.classList.add('visible'), (Array.from(cards).indexOf(e.target) % 2) * 100);
+    }
+  });
+}, {threshold: 0.15});
+cards.forEach(c => obs.observe(c));
+</script>
+</body>
+</html>
