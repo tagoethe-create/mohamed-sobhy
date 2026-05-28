@@ -79,10 +79,11 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 
 /* SLIDER */
 .cert-img-slider{position:relative;}
-.slider-inner{display:grid;grid-template-columns:100%;overflow:hidden;}
-.cert-img-slide{grid-column:1;grid-row:1;width:100%;visibility:hidden;pointer-events:none;}
-.cert-img-slide.active{visibility:visible;pointer-events:auto;}
+.slider-inner{display:block;}
+.cert-img-slide{display:none;width:100%;}
+.cert-img-slide.active{display:block;}
 .cert-img-slide img{width:100%;height:auto;display:block;cursor:pointer;}
+.cert-img-slide .img-placeholder{width:100%;}
 .slider-arrow{position:absolute;top:50%;transform:translateY(-50%);background:rgba(0,0,0,0.75);border:1px solid rgba(255,255,255,0.2);color:#fff;width:30px;height:30px;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:15px;z-index:10;transition:background .2s,border-color .2s;user-select:none;}
 .slider-arrow:hover{background:var(--bordeaux);border-color:var(--bordeaux);}
 .slider-arrow.prev{left:6px;}
