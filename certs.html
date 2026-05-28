@@ -48,21 +48,39 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 .cert-org{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--bordeaux-light);margin-bottom:8px;}
 .cert-name{font-family:'Barlow Condensed',sans-serif;font-size:26px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;margin-bottom:12px;line-height:1.1;}
 .cert-desc{font-size:13px;color:var(--lightgray);line-height:1.75;}
-.cert-tag{display:inline-block;margin-top:16px;background:rgba(109,26,42,0.2);border:1px solid var(--bordeaux);color:var(--bordeaux-light);font-size:10px;letter-spacing:2px;text-transform:uppercase;padding:6px 12px;}
+.cert-tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px;}
+.cert-tag{display:inline-block;background:rgba(109,26,42,0.2);border:1px solid var(--bordeaux);color:var(--bordeaux-light);font-size:10px;letter-spacing:2px;text-transform:uppercase;padding:6px 12px;}
 
-/*
-==============================================================
-📸 ZERTIFIKAT-BILDER EINFÜGEN (OPTIONAL)
-==============================================================
-Falls du Fotos der Zertifikate zeigen möchtest, kannst du
-unterhalb von .cert-tag ein <img> hinzufügen:
+/* VIEW BUTTON */
+.cert-btn{display:inline-flex;align-items:center;gap:8px;margin-top:16px;padding:10px 20px;background:transparent;border:1px solid var(--bordeaux);color:var(--bordeaux-light);font-size:11px;letter-spacing:2px;text-transform:uppercase;font-family:'Barlow',sans-serif;font-weight:600;cursor:pointer;transition:background .2s, color .2s;}
+.cert-btn:hover{background:var(--bordeaux);color:var(--white);}
+.cert-btn svg{width:14px;height:14px;flex-shrink:0;}
 
-<img src="images/cert-ifaa.jpg" alt="IFAA Certificate"
-     style="width:100%;margin-top:20px;opacity:.7;">
+/* MODAL OVERLAY */
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.92);z-index:1000;align-items:center;justify-content:center;padding:20px;}
+.modal-overlay.active{display:flex;}
+.modal-box{background:#141414;border:1px solid rgba(255,255,255,0.08);width:100%;max-width:900px;max-height:90vh;overflow-y:auto;padding:40px;position:relative;}
+.modal-close{position:absolute;top:20px;right:20px;background:transparent;border:1px solid rgba(255,255,255,0.15);color:var(--white);width:36px;height:36px;cursor:pointer;font-size:18px;display:flex;align-items:center;justify-content:center;transition:border-color .2s, color .2s;}
+.modal-close:hover{border-color:var(--bordeaux);color:var(--bordeaux-light);}
+.modal-header{margin-bottom:32px;padding-bottom:20px;border-bottom:1px solid rgba(255,255,255,0.07);}
+.modal-issuer{font-size:10px;letter-spacing:3px;color:var(--bordeaux-light);text-transform:uppercase;margin-bottom:8px;}
+.modal-title{font-family:'Bebas Neue',sans-serif;font-size:32px;letter-spacing:1px;}
 
-Die Bilder werden dann im jeweiligen Zertifikat-Block angezeigt.
-==============================================================
-*/
+/* CERTIFICATE IMAGE GRID */
+.modal-images{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px;}
+.cert-img-card{border:1px solid rgba(255,255,255,0.07);overflow:hidden;cursor:pointer;transition:border-color .2s;}
+.cert-img-card:hover{border-color:var(--bordeaux);}
+.img-placeholder{width:100%;aspect-ratio:3/4;background:#1e1e1e;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;color:#444;}
+.img-placeholder svg{width:32px;height:32px;opacity:.4;}
+.img-placeholder span{font-size:11px;letter-spacing:1px;text-transform:uppercase;opacity:.5;}
+.cert-img-label{padding:10px 14px;font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--gray);border-top:1px solid rgba(255,255,255,0.07);}
+
+/* LIGHTBOX */
+.lightbox{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.97);z-index:2000;align-items:center;justify-content:center;}
+.lightbox.active{display:flex;}
+.lightbox img{max-width:90vw;max-height:90vh;object-fit:contain;border:1px solid rgba(255,255,255,0.08);}
+.lightbox-close{position:fixed;top:20px;right:20px;background:#141414;border:1px solid rgba(255,255,255,0.15);color:var(--white);width:40px;height:40px;cursor:pointer;font-size:20px;display:flex;align-items:center;justify-content:center;transition:border-color .2s;}
+.lightbox-close:hover{border-color:var(--bordeaux);}
 
 /* INTERNATIONAL BADGE SECTION */
 .intl-section{padding:80px 48px;text-align:center;border-top:1px solid rgba(255,255,255,0.06);}
@@ -103,6 +121,7 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);paddi
   .certs-grid{grid-template-columns:1fr;}
   .certs-cta{grid-template-columns:1fr;}
   footer{flex-direction:column;padding:48px 24px;}
+  .modal-box{padding:24px;}
 }
 </style>
 </head>
@@ -146,90 +165,93 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);paddi
 
   <div class="certs-grid">
 
+    <!-- 01 IFAA -->
     <div class="cert-card">
       <div class="cert-number">01</div>
       <div class="cert-body">
         <div class="cert-org">IFAA Germany</div>
-        <div class="cert-name">International Fitness & Aerobics Academy</div>
-        <div class="cert-desc">One of Europe's most prestigious fitness certifications. Covers advanced training methodology, anatomy, physiology, and program design to international standards.</div>
-        <div class="cert-tag">Germany · International</div>
-        <!--
-        ========================================================
-        📸 BILD DES ZERTIFIKATS HIER EINFÜGEN (optional):
-        <img src="images/cert-ifaa.jpg" alt="IFAA Certificate"
-             style="width:100%;margin-top:20px;border:1px solid rgba(255,255,255,0.08);">
-        ========================================================
-        -->
+        <div class="cert-name">International Fitness &amp; Aerobics Academy</div>
+        <div class="cert-desc">Group Fitness B-Licenses in Aerobic &amp; Step and Workout Instruction, plus Functional Training &amp; HIIT — certified in Ketsch, May 2025.</div>
+        <div class="cert-tags">
+          <span class="cert-tag">Germany · International</span>
+          <span class="cert-tag">2025</span>
+        </div>
+        <button class="cert-btn" onclick="openModal('ifaa')">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="M3 9h18M9 21V9"/></svg>
+          View Certificates
+        </button>
       </div>
     </div>
 
+    <!-- 02 IASST -->
     <div class="cert-card">
       <div class="cert-number">02</div>
       <div class="cert-body">
         <div class="cert-org">IASST</div>
-        <div class="cert-name">International Academy of Sports Science & Technology</div>
-        <div class="cert-desc">Advanced sports science certification covering biomechanics, performance optimization, and evidence-based training techniques for elite-level coaching.</div>
-        <div class="cert-tag">International</div>
+        <div class="cert-name">International Academy of Sports Science &amp; Technology</div>
+        <div class="cert-desc">Rehabilitation Specialist and Special Needs Specialist — advanced certifications in sports science and adaptive training, July 2024.</div>
+        <div class="cert-tags">
+          <span class="cert-tag">International</span>
+          <span class="cert-tag">2024</span>
+        </div>
+        <button class="cert-btn" onclick="openModal('iasst')">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="M3 9h18M9 21V9"/></svg>
+          View Certificates
+        </button>
       </div>
     </div>
 
+    <!-- 03 ICG -->
     <div class="cert-card">
       <div class="cert-number">03</div>
       <div class="cert-body">
         <div class="cert-org">ICG</div>
         <div class="cert-name">Indoor Cycling Group Certification</div>
-        <div class="cert-desc">Specialized certification in indoor cycling and cardio conditioning. Internationally recognized by fitness professionals across 40+ countries.</div>
-        <div class="cert-tag">International · Cardio</div>
+        <div class="cert-desc">ICG Basic Level, Pro Level, and Coach By Color — certified instructor for beginner through advanced indoor cycling classes, November 2025. Accredited by REPS/CIMSPA, ACE, and NASM.</div>
+        <div class="cert-tags">
+          <span class="cert-tag">International · Cardio</span>
+          <span class="cert-tag">2025</span>
+        </div>
+        <button class="cert-btn" onclick="openModal('icg')">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="M3 9h18M9 21V9"/></svg>
+          View Certificates
+        </button>
       </div>
     </div>
 
+    <!-- 04 NUTRITION -->
     <div class="cert-card">
       <div class="cert-number">04</div>
       <div class="cert-body">
         <div class="cert-org">Nutrition Certification</div>
-        <div class="cert-name">Sports Nutrition & Meal Planning</div>
-        <div class="cert-desc">Comprehensive nutrition certification covering macronutrient optimization, meal timing, supplementation science, and body composition management.</div>
-        <div class="cert-tag">Nutrition · Performance</div>
+        <div class="cert-name">Sports Nutrition &amp; Meal Planning</div>
+        <div class="cert-desc">Professional Program in Sports Nutrition (AUPS, 2023) and Unconventional Nutrition (Edraak, 2024) — covering macronutrients, supplementation, and evidence-based dietary planning.</div>
+        <div class="cert-tags">
+          <span class="cert-tag">AUPS · Edraak</span>
+          <span class="cert-tag">2023–2024</span>
+        </div>
+        <button class="cert-btn" onclick="openModal('nutrition')">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="M3 9h18M9 21V9"/></svg>
+          View Certificates
+        </button>
       </div>
     </div>
 
+    <!-- 05 ADDITIONAL -->
     <div class="cert-card">
       <div class="cert-number">05</div>
       <div class="cert-body">
-        <div class="cert-org">Personal Training</div>
-        <div class="cert-name">Certified Personal Trainer (CPT)</div>
-        <div class="cert-desc">Foundation certification in personal training methodology, covering client assessment, program design, and periodization principles for all fitness levels.</div>
-        <div class="cert-tag">Personal Training</div>
-      </div>
-    </div>
-
-    <div class="cert-card">
-      <div class="cert-number">06</div>
-      <div class="cert-body">
-        <div class="cert-org">Pilates</div>
-        <div class="cert-name">Pilates Instructor Certification</div>
-        <div class="cert-desc">Professional Pilates instruction certification covering mat and reformer work, postural correction, core stability, and therapeutic applications.</div>
-        <div class="cert-tag">Mind & Body · Flexibility</div>
-      </div>
-    </div>
-
-    <div class="cert-card">
-      <div class="cert-number">07</div>
-      <div class="cert-body">
-        <div class="cert-org">Functional Training</div>
-        <div class="cert-name">Functional Movement Specialist</div>
-        <div class="cert-desc">Specialized in functional movement patterns, corrective exercise, and movement screening to optimize performance and reduce injury risk in everyday athletes.</div>
-        <div class="cert-tag">Movement · Functional</div>
-      </div>
-    </div>
-
-    <div class="cert-card">
-      <div class="cert-number">08</div>
-      <div class="cert-body">
-        <div class="cert-org">Body Transformation</div>
-        <div class="cert-name">Body Composition & Transformation Coach</div>
-        <div class="cert-desc">Advanced certification in body recomposition combining training, nutrition, recovery, and lifestyle coaching for complete physique transformation results.</div>
-        <div class="cert-tag">Transformation · Advanced</div>
+        <div class="cert-org">Additional Certifications</div>
+        <div class="cert-name">Sports Massage, Aqua Fitness &amp; More</div>
+        <div class="cert-desc">Professional Program in Sports Massage (AUPS), Aqua Group Fitness Coach (PBLS), Functional Mobility (EBF Academy), and Leadership Skills (IIM Ahmedabad / Coursera).</div>
+        <div class="cert-tags">
+          <span class="cert-tag">2023–2025</span>
+          <span class="cert-tag">International</span>
+        </div>
+        <button class="cert-btn" onclick="openModal('additional')">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="M3 9h18M9 21V9"/></svg>
+          View Certificates
+        </button>
       </div>
     </div>
 
@@ -244,7 +266,8 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);paddi
     <div class="intl-logo-item"><div class="intl-logo-name">IFAA</div><div class="intl-logo-country">Germany</div></div>
     <div class="intl-logo-item"><div class="intl-logo-name">IASST</div><div class="intl-logo-country">International</div></div>
     <div class="intl-logo-item"><div class="intl-logo-name">ICG</div><div class="intl-logo-country">International</div></div>
-    <div class="intl-logo-item"><div class="intl-logo-name">CPT</div><div class="intl-logo-country">Certified</div></div>
+    <div class="intl-logo-item"><div class="intl-logo-name">AUPS</div><div class="intl-logo-country">Certified</div></div>
+    <div class="intl-logo-item"><div class="intl-logo-name">PBLS</div><div class="intl-logo-country">International</div></div>
   </div>
 </div>
 
@@ -271,11 +294,132 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);paddi
   <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.137.563 4.14 1.543 5.874L0 24l6.336-1.519A11.934 11.934 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.006-1.372l-.36-.214-3.726.893.926-3.636-.235-.373A9.818 9.818 0 012.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg>
 </a>
 
+<!-- MODAL -->
+<div class="modal-overlay" id="modal" onclick="closeModalOutside(event)">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal()">&#x2715;</button>
+    <div class="modal-header">
+      <p class="modal-issuer" id="modal-issuer"></p>
+      <h2 class="modal-title" id="modal-title"></h2>
+    </div>
+    <div class="modal-images" id="modal-images"></div>
+  </div>
+</div>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+  <button class="lightbox-close">&#x2715;</button>
+  <img id="lightbox-img" src="" alt="">
+</div>
+
 <script>
+/* ════════════════════════════════════════════
+   ZERTIFIKAT-DATEN
+   Ersetze "BILD_HIER_EINFÜGEN/..." mit echten Bildpfaden,
+   z.B. src: 'images/ifaa-aerobic-step.jpg'
+   ════════════════════════════════════════════ */
+const certData = {
+  ifaa: {
+    issuer: 'IFAA Germany',
+    title: 'International Fitness & Aerobics Academy',
+    certs: [
+      { src: 'BILD_HIER_EINFÜGEN/ifaa-aerobic-step.jpg',  label: 'Group Fitness B-License · Aerobic & Step' },
+      { src: 'BILD_HIER_EINFÜGEN/ifaa-workout.jpg',       label: 'Group Fitness B-License · Workout Instructor' },
+      { src: 'BILD_HIER_EINFÜGEN/ifaa-hiit.jpg',          label: 'Functional Training Basics & HIIT' },
+    ]
+  },
+  iasst: {
+    issuer: 'IASST · International Academy of Sports Science',
+    title: 'Rehabilitation & Special Needs Specialist',
+    certs: [
+      { src: 'BILD_HIER_EINFÜGEN/iasst-rehab.jpg',         label: 'Rehabilitation Specialist · July 2024' },
+      { src: 'BILD_HIER_EINFÜGEN/iasst-special-needs.jpg', label: 'Special Needs Specialist · July 2024' },
+    ]
+  },
+  icg: {
+    issuer: 'ICG · Indoor Cycling Group',
+    title: 'Indoor Cycling Certification',
+    certs: [
+      { src: 'BILD_HIER_EINFÜGEN/icg-basic.jpg',          label: 'ICG Basic Level Online' },
+      { src: 'BILD_HIER_EINFÜGEN/icg-pro.jpg',            label: 'ICG Pro Level Online' },
+      { src: 'BILD_HIER_EINFÜGEN/icg-coach-by-color.jpg', label: 'Coach By Color Online' },
+      { src: 'BILD_HIER_EINFÜGEN/icg-wattrate.jpg',       label: 'Wattrate Power 1 Online' },
+    ]
+  },
+  nutrition: {
+    issuer: 'AUPS · Edraak',
+    title: 'Sports Nutrition & Meal Planning',
+    certs: [
+      { src: 'BILD_HIER_EINFÜGEN/aups-sports-nutrition.jpg',       label: 'Professional Program in Sports Nutrition' },
+      { src: 'BILD_HIER_EINFÜGEN/edraak-unconventional-nutrition.jpg', label: 'Unconventional Nutrition' },
+    ]
+  },
+  additional: {
+    issuer: 'AUPS · PBLS · EBF · Coursera',
+    title: 'Sports Massage, Aqua Fitness & More',
+    certs: [
+      { src: 'BILD_HIER_EINFÜGEN/aups-sports-massage.jpg',     label: 'Professional Program in Sports Massage' },
+      { src: 'BILD_HIER_EINFÜGEN/pbls-aqua-fitness.jpg',       label: 'Aqua Group Fitness Exercises Coach' },
+      { src: 'BILD_HIER_EINFÜGEN/ebf-functional-mobility.jpg', label: 'Functional Mobility Mini-Course' },
+      { src: 'BILD_HIER_EINFÜGEN/coursera-leadership.jpg',     label: 'Leadership Skills · IIM Ahmedabad' },
+    ]
+  }
+};
+
+function openModal(key) {
+  const d = certData[key];
+  document.getElementById('modal-issuer').textContent = d.issuer;
+  document.getElementById('modal-title').textContent  = d.title;
+  const grid = document.getElementById('modal-images');
+  grid.innerHTML = d.certs.map(c => `
+    <div class="cert-img-card" onclick="openLightbox('${c.src}', '${c.label}')">
+      ${c.src.includes('BILD_HIER_EINFÜGEN')
+        ? `<div class="img-placeholder">
+             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+               <rect x="3" y="3" width="18" height="18" rx="2"/>
+               <circle cx="8.5" cy="8.5" r="1.5"/>
+               <path d="m21 15-5-5L5 21"/>
+             </svg>
+             <span>Bild einfügen</span>
+           </div>`
+        : `<img src="${c.src}" alt="${c.label}" style="width:100%;display:block;">`
+      }
+      <div class="cert-img-label">${c.label}</div>
+    </div>
+  `).join('');
+  document.getElementById('modal').classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal() {
+  document.getElementById('modal').classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+function closeModalOutside(e) {
+  if (e.target === document.getElementById('modal')) closeModal();
+}
+
+function openLightbox(src, alt) {
+  if (src.includes('BILD_HIER_EINFÜGEN')) return;
+  document.getElementById('lightbox-img').src = src;
+  document.getElementById('lightbox-img').alt = alt;
+  document.getElementById('lightbox').classList.add('active');
+}
+
+function closeLightbox() {
+  document.getElementById('lightbox').classList.remove('active');
+}
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') { closeModal(); closeLightbox(); }
+});
+
+/* Scroll animation */
 const cards = document.querySelectorAll('.cert-card');
 const obs = new IntersectionObserver(entries => {
-  entries.forEach((e, i) => {
-    if(e.isIntersecting) {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
       setTimeout(() => e.target.classList.add('visible'), (Array.from(cards).indexOf(e.target) % 2) * 100);
     }
   });
