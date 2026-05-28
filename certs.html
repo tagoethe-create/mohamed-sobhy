@@ -22,7 +22,6 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 .nav-cta{background:var(--bordeaux);color:var(--white);padding:11px 24px;font-size:11px;letter-spacing:2px;text-transform:uppercase;font-weight:700;text-decoration:none;transition:background .3s;}
 .nav-cta:hover{background:var(--bordeaux-light);}
 
-/* PAGE HERO */
 .page-hero{padding-top:160px;padding-bottom:80px;padding-left:48px;padding-right:48px;border-bottom:1px solid rgba(255,255,255,0.06);}
 .page-hero-inner{max-width:700px;}
 .eyebrow{font-size:11px;letter-spacing:4px;text-transform:uppercase;color:var(--bordeaux-light);margin-bottom:20px;animation:fadeUp .7s .2s both;}
@@ -30,13 +29,11 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 .page-title .outline{-webkit-text-stroke:1px rgba(255,255,255,0.8);color:transparent;}
 .page-sub{font-size:16px;color:var(--lightgray);line-height:1.8;margin-top:28px;max-width:520px;animation:fadeUp .7s .6s both;}
 
-/* CERT COUNT BANNER */
 .cert-banner{background:var(--bordeaux);padding:40px 48px;display:flex;align-items:center;gap:48px;}
 .cert-banner-num{font-family:'Bebas Neue',sans-serif;font-size:96px;line-height:1;}
 .cert-banner-text h3{font-family:'Bebas Neue',sans-serif;font-size:36px;margin-bottom:6px;}
 .cert-banner-text p{font-size:14px;color:rgba(255,255,255,0.75);max-width:500px;line-height:1.7;}
 
-/* CERTS GRID */
 .certs-section{padding:100px 48px;background:var(--dark);}
 .certs-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:2px;margin-top:60px;}
 .cert-card{background:var(--black);padding:48px 40px;position:relative;overflow:hidden;display:grid;grid-template-columns:80px 1fr;gap:32px;align-items:start;cursor:default;transition:background .3s;}
@@ -44,63 +41,55 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 .cert-card::after{content:'';position:absolute;left:0;top:0;bottom:0;width:2px;background:var(--bordeaux);transform:scaleY(0);transform-origin:top;transition:transform .4s;}
 .cert-card:hover::after{transform:scaleY(1);}
 .cert-number{font-family:'Bebas Neue',sans-serif;font-size:56px;line-height:1;color:var(--bordeaux-light);}
-.cert-body{}
 .cert-org{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--bordeaux-light);margin-bottom:8px;}
 .cert-name{font-family:'Barlow Condensed',sans-serif;font-size:26px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;margin-bottom:12px;line-height:1.1;}
 .cert-desc{font-size:13px;color:var(--lightgray);line-height:1.75;}
 .cert-tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px;}
 .cert-tag{display:inline-block;background:rgba(109,26,42,0.2);border:1px solid var(--bordeaux);color:var(--bordeaux-light);font-size:10px;letter-spacing:2px;text-transform:uppercase;padding:6px 12px;}
 
-/* VIEW BUTTON */
-.cert-btn{display:inline-flex;align-items:center;gap:8px;margin-top:16px;padding:10px 20px;background:transparent;border:1px solid var(--bordeaux);color:var(--bordeaux-light);font-size:11px;letter-spacing:2px;text-transform:uppercase;font-family:'Barlow',sans-serif;font-weight:600;cursor:pointer;transition:background .2s, color .2s;}
+.cert-btn{display:inline-flex;align-items:center;gap:8px;margin-top:16px;padding:10px 20px;background:transparent;border:1px solid var(--bordeaux);color:var(--bordeaux-light);font-size:11px;letter-spacing:2px;text-transform:uppercase;font-family:'Barlow',sans-serif;font-weight:600;cursor:pointer;transition:background .2s,color .2s;}
 .cert-btn:hover{background:var(--bordeaux);color:var(--white);}
 .cert-btn svg{width:14px;height:14px;flex-shrink:0;}
 
-/* MODAL OVERLAY */
 .modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.92);z-index:1000;align-items:center;justify-content:center;padding:20px;}
 .modal-overlay.active{display:flex;}
-.modal-box{background:#141414;border:1px solid rgba(255,255,255,0.08);width:100%;max-width:900px;max-height:90vh;overflow-y:auto;padding:40px;position:relative;}
-.modal-close{position:absolute;top:20px;right:20px;background:transparent;border:1px solid rgba(255,255,255,0.15);color:var(--white);width:36px;height:36px;cursor:pointer;font-size:18px;display:flex;align-items:center;justify-content:center;transition:border-color .2s, color .2s;}
+.modal-box{background:#141414;border:1px solid rgba(255,255,255,0.08);width:100%;max-width:960px;max-height:90vh;overflow-y:auto;padding:40px;position:relative;}
+.modal-close{position:absolute;top:20px;right:20px;background:transparent;border:1px solid rgba(255,255,255,0.15);color:var(--white);width:36px;height:36px;cursor:pointer;font-size:18px;display:flex;align-items:center;justify-content:center;transition:border-color .2s,color .2s;}
 .modal-close:hover{border-color:var(--bordeaux);color:var(--bordeaux-light);}
 .modal-header{margin-bottom:32px;padding-bottom:20px;border-bottom:1px solid rgba(255,255,255,0.07);}
 .modal-issuer{font-size:10px;letter-spacing:3px;color:var(--bordeaux-light);text-transform:uppercase;margin-bottom:8px;}
 .modal-title{font-family:'Bebas Neue',sans-serif;font-size:32px;letter-spacing:1px;}
 
-/* CERTIFICATE IMAGE GRID */
 .modal-images{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px;}
 .cert-img-card{border:1px solid rgba(255,255,255,0.07);overflow:hidden;transition:border-color .2s;}
 .cert-img-card:hover{border-color:var(--bordeaux);}
-.img-placeholder{width:100%;aspect-ratio:4/3;background:#1e1e1e;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;color:#444;}
-.cert-img-slide img{width:100%;height:auto;display:block;cursor:pointer;}
-.img-placeholder svg{width:32px;height:32px;opacity:.4;}
-.img-placeholder span{font-size:11px;letter-spacing:1px;text-transform:uppercase;opacity:.5;}
-.cert-img-label{padding:10px 14px;font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--gray);border-top:1px solid rgba(255,255,255,0.07);display:flex;align-items:center;justify-content:space-between;}
-.cert-badge{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--bordeaux-light);background:rgba(109,26,42,0.2);border:1px solid var(--bordeaux);padding:3px 8px;flex-shrink:0;}
 
-/* SLIDER */
+/* SLIDER — display:none/block, kein overflow clip */
 .cert-img-slider{position:relative;}
-.slider-inner{display:block;}
 .cert-img-slide{display:none;width:100%;}
 .cert-img-slide.active{display:block;}
 .cert-img-slide img{width:100%;height:auto;display:block;cursor:pointer;}
-.cert-img-slide .img-placeholder{width:100%;}
-.slider-arrow{position:absolute;top:50%;transform:translateY(-50%);background:rgba(0,0,0,0.75);border:1px solid rgba(255,255,255,0.2);color:#fff;width:30px;height:30px;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:15px;z-index:10;transition:background .2s,border-color .2s;user-select:none;}
+.img-placeholder{width:100%;aspect-ratio:4/3;background:#1e1e1e;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;color:#444;}
+.img-placeholder svg{width:32px;height:32px;opacity:.4;}
+.img-placeholder span{font-size:11px;letter-spacing:1px;text-transform:uppercase;opacity:.5;}
+
+.slider-arrows{display:flex;justify-content:space-between;padding:6px 8px 2px;}
+.slider-arrow{background:transparent;border:1px solid rgba(255,255,255,0.15);color:#fff;width:28px;height:28px;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:14px;transition:background .2s,border-color .2s;user-select:none;}
 .slider-arrow:hover{background:var(--bordeaux);border-color:var(--bordeaux);}
-.slider-arrow.prev{left:6px;}
-.slider-arrow.next{right:6px;}
-.slider-arrow.hidden{display:none;}
-.slider-dots{display:flex;justify-content:center;gap:5px;padding:7px 0 4px;}
+.slider-arrow.hidden{visibility:hidden;}
+.slider-dots{display:flex;justify-content:center;gap:5px;padding:2px 0 6px;}
 .slider-dot{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,0.2);cursor:pointer;transition:background .2s;}
 .slider-dot.active{background:var(--bordeaux-light);}
 
-/* LIGHTBOX */
+.cert-img-label{padding:10px 14px;font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--gray);border-top:1px solid rgba(255,255,255,0.07);display:flex;align-items:center;justify-content:space-between;}
+.cert-badge{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--bordeaux-light);background:rgba(109,26,42,0.2);border:1px solid var(--bordeaux);padding:3px 8px;flex-shrink:0;}
+
 .lightbox{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.97);z-index:2000;align-items:center;justify-content:center;}
 .lightbox.active{display:flex;}
 .lightbox img{max-width:90vw;max-height:90vh;object-fit:contain;border:1px solid rgba(255,255,255,0.08);}
 .lightbox-close{position:fixed;top:20px;right:20px;background:#141414;border:1px solid rgba(255,255,255,0.15);color:var(--white);width:40px;height:40px;cursor:pointer;font-size:20px;display:flex;align-items:center;justify-content:center;transition:border-color .2s;}
 .lightbox-close:hover{border-color:var(--bordeaux);}
 
-/* INTERNATIONAL BADGE SECTION */
 .intl-section{padding:80px 48px;text-align:center;border-top:1px solid rgba(255,255,255,0.06);}
 .intl-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(40px,5vw,72px);margin-bottom:16px;}
 .intl-sub{font-size:15px;color:var(--lightgray);max-width:560px;margin:0 auto 60px;line-height:1.8;}
@@ -110,7 +99,6 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 .intl-logo-name{font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:2px;}
 .intl-logo-country{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--gray);margin-top:4px;}
 
-/* CTA */
 .certs-cta{padding:100px 48px;background:var(--dark2);display:grid;grid-template-columns:1fr auto;gap:40px;align-items:center;}
 .certs-cta h2{font-family:'Bebas Neue',sans-serif;font-size:clamp(40px,5vw,72px);line-height:1;}
 .certs-cta p{font-size:15px;color:var(--lightgray);margin-top:12px;max-width:500px;line-height:1.7;}
@@ -158,7 +146,6 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);paddi
   <a href="index.html#contact" class="nav-cta">Book Now</a>
 </nav>
 
-<!-- PAGE HERO -->
 <div class="page-hero">
   <div class="page-hero-inner">
     <div class="eyebrow">Professional Credentials</div>
@@ -167,7 +154,6 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);paddi
   </div>
 </div>
 
-<!-- BANNER -->
 <div class="cert-banner">
   <div class="cert-banner-num">26</div>
   <div class="cert-banner-text">
@@ -176,24 +162,18 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);paddi
   </div>
 </div>
 
-<!-- CERTS GRID -->
 <div class="certs-section">
   <div style="font-size:11px;letter-spacing:4px;text-transform:uppercase;color:var(--gray);margin-bottom:16px;">All Credentials</div>
   <div style="font-family:'Bebas Neue',sans-serif;font-size:clamp(48px,6vw,80px);line-height:1;">CERTIFICATIONS</div>
-
   <div class="certs-grid">
 
-    <!-- 01 IFAA -->
     <div class="cert-card">
       <div class="cert-number">01</div>
       <div class="cert-body">
         <div class="cert-org">IFAA Germany</div>
         <div class="cert-name">International Fitness &amp; Aerobics Academy</div>
         <div class="cert-desc">Group Fitness B-Licenses in Aerobic &amp; Step and Workout Instruction, plus Functional Training &amp; HIIT — certified in Ketsch, May 2025.</div>
-        <div class="cert-tags">
-          <span class="cert-tag">Germany · International</span>
-          <span class="cert-tag">2025</span>
-        </div>
+        <div class="cert-tags"><span class="cert-tag">Germany · International</span><span class="cert-tag">2025</span></div>
         <button class="cert-btn" onclick="openModal('ifaa')">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="M3 9h18M9 21V9"/></svg>
           View Certificates
@@ -201,17 +181,13 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);paddi
       </div>
     </div>
 
-    <!-- 02 IASST -->
     <div class="cert-card">
       <div class="cert-number">02</div>
       <div class="cert-body">
         <div class="cert-org">IASST</div>
         <div class="cert-name">International Academy of Sports Science &amp; Technology</div>
         <div class="cert-desc">Rehabilitation Specialist and Special Needs Specialist — advanced certifications in sports science and adaptive training, July 2024.</div>
-        <div class="cert-tags">
-          <span class="cert-tag">International</span>
-          <span class="cert-tag">2024</span>
-        </div>
+        <div class="cert-tags"><span class="cert-tag">International</span><span class="cert-tag">2024</span></div>
         <button class="cert-btn" onclick="openModal('iasst')">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="M3 9h18M9 21V9"/></svg>
           View Certificates
@@ -219,17 +195,13 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);paddi
       </div>
     </div>
 
-    <!-- 03 ICG -->
     <div class="cert-card">
       <div class="cert-number">03</div>
       <div class="cert-body">
         <div class="cert-org">ICG</div>
         <div class="cert-name">Indoor Cycling Group Certification</div>
         <div class="cert-desc">ICG Basic Level, Pro Level, and Coach By Color — certified instructor for beginner through advanced indoor cycling classes, November 2025. Accredited by REPS/CIMSPA, ACE, and NASM.</div>
-        <div class="cert-tags">
-          <span class="cert-tag">International · Cardio</span>
-          <span class="cert-tag">2025</span>
-        </div>
+        <div class="cert-tags"><span class="cert-tag">International · Cardio</span><span class="cert-tag">2025</span></div>
         <button class="cert-btn" onclick="openModal('icg')">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="M3 9h18M9 21V9"/></svg>
           View Certificates
@@ -237,17 +209,13 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);paddi
       </div>
     </div>
 
-    <!-- 04 NUTRITION -->
     <div class="cert-card">
       <div class="cert-number">04</div>
       <div class="cert-body">
         <div class="cert-org">Nutrition Certification</div>
         <div class="cert-name">Sports Nutrition &amp; Meal Planning</div>
         <div class="cert-desc">Professional Program in Sports Nutrition (AUPS, 2023) and Unconventional Nutrition (Edraak, 2024) — covering macronutrients, supplementation, and evidence-based dietary planning.</div>
-        <div class="cert-tags">
-          <span class="cert-tag">AUPS · Edraak</span>
-          <span class="cert-tag">2023–2024</span>
-        </div>
+        <div class="cert-tags"><span class="cert-tag">AUPS · Edraak</span><span class="cert-tag">2023–2024</span></div>
         <button class="cert-btn" onclick="openModal('nutrition')">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="M3 9h18M9 21V9"/></svg>
           View Certificates
@@ -255,17 +223,13 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);paddi
       </div>
     </div>
 
-    <!-- 05 ADDITIONAL -->
     <div class="cert-card">
       <div class="cert-number">05</div>
       <div class="cert-body">
         <div class="cert-org">Additional Certifications</div>
         <div class="cert-name">Sports Massage, Aqua Fitness &amp; More</div>
         <div class="cert-desc">Professional Program in Sports Massage (AUPS), Aqua Group Fitness Coach (PBLS), Functional Mobility (EBF Academy), and Leadership Skills (IIM Ahmedabad / Coursera).</div>
-        <div class="cert-tags">
-          <span class="cert-tag">2023–2025</span>
-          <span class="cert-tag">International</span>
-        </div>
+        <div class="cert-tags"><span class="cert-tag">2023–2025</span><span class="cert-tag">International</span></div>
         <button class="cert-btn" onclick="openModal('additional')">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="M3 9h18M9 21V9"/></svg>
           View Certificates
@@ -276,7 +240,6 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);paddi
   </div>
 </div>
 
-<!-- INTERNATIONAL LOGOS -->
 <div class="intl-section">
   <div class="intl-title">INTERNATIONALLY RECOGNIZED</div>
   <p class="intl-sub">Mohamed's certifications are issued and recognized by leading organizations across Europe, the Middle East, and beyond.</p>
@@ -289,7 +252,6 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);paddi
   </div>
 </div>
 
-<!-- CTA -->
 <div class="certs-cta">
   <div>
     <h2>READY TO TRAIN<br>WITH THE BEST?</h2>
@@ -312,7 +274,6 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);paddi
   <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.137.563 4.14 1.543 5.874L0 24l6.336-1.519A11.934 11.934 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.006-1.372l-.36-.214-3.726.893.926-3.636-.235-.373A9.818 9.818 0 012.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg>
 </a>
 
-<!-- MODAL -->
 <div class="modal-overlay" id="modal" onclick="closeModalOutside(event)">
   <div class="modal-box">
     <button class="modal-close" onclick="closeModal()">&#x2715;</button>
@@ -324,35 +285,21 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);paddi
   </div>
 </div>
 
-<!-- LIGHTBOX -->
 <div class="lightbox" id="lightbox" onclick="closeLightbox()">
   <button class="lightbox-close">&#x2715;</button>
   <img id="lightbox-img" src="" alt="">
 </div>
 
 <script>
-/* ════════════════════════════════════════════
-   ZERTIFIKAT-DATEN
-   Ersetze "BILD_HIER_EINFÜGEN/..." mit echten Bildpfaden,
-   z.B. src: 'images/ifaa-aerobic-step.jpg'
-   ════════════════════════════════════════════ */
-/* ════════════════════════════════════════════
-   ZERTIFIKAT-DATEN
-   Für Zertifikate MIT Varianten (z.B. ICG):
-     variants: [ { src: '...', badge: 'NASM' }, ... ]
-   Für Zertifikate OHNE Varianten:
-     variants: [ { src: '...', badge: null } ]
-   Ersetze 'BILD_HIER/...' mit echten Bildpfaden.
-   ════════════════════════════════════════════ */
 const certData = {
 
   ifaa: {
     issuer: 'IFAA Germany',
     title: 'International Fitness & Aerobics Academy',
     certs: [
-      { label: 'Group Fitness B-License · Aerobic & Step',    variants: [{ src: 'bilder/0018.jpg', badge: null }] },
-      { label: 'Group Fitness B-License · Workout Instructor', variants: [{ src: 'bilder/0020.jpg',      badge: null }] },
-      { label: 'Functional Training Basics & HIIT',            variants: [{ src: 'bilder/0016.jpg',         badge: null }] },
+      { label: 'Group Fitness B-License · Aerobic & Step',     variants: [{ src: 'bilder/0018.jpg', badge: null }] },
+      { label: 'Group Fitness B-License · Workout Instructor', variants: [{ src: 'bilder/0020.jpg', badge: null }] },
+      { label: 'Functional Training Basics & HIIT',            variants: [{ src: 'bilder/0016.jpg', badge: null }] },
     ]
   },
 
@@ -360,7 +307,7 @@ const certData = {
     issuer: 'IASST · International Academy of Sports Science',
     title: 'Rehabilitation & Special Needs Specialist',
     certs: [
-      { label: 'Rehabilitation Specialist · July 2024', variants: [{ src: 'bilder/0029_edited.jpg',         badge: null }] },
+      { label: 'Rehabilitation Specialist · July 2024', variants: [{ src: 'bilder/0029_edited.jpg', badge: null }] },
       { label: 'Special Needs Specialist · July 2024',  variants: [{ src: 'bilder/0034_edited.jpg', badge: null }] },
     ]
   },
@@ -372,37 +319,37 @@ const certData = {
       {
         label: 'ICG Basic Level',
         variants: [
-          { src: 'bilder/0010.jpg', badge: 'NASM' },
+          { src: 'bilder/0010.jpg',              badge: 'NASM' },
           { src: 'BILD_HIER/icg-basic-affa.jpg', badge: 'AFFA' },
-          { src: 'bilder/0003.jpg',  badge: 'ACE'  },
-          { src: 'bilder/0001.jpg', badge: 'REPS' },
+          { src: 'bilder/0003.jpg',              badge: 'ACE'  },
+          { src: 'bilder/0001.jpg',              badge: 'REPS' },
         ]
       },
       {
         label: 'ICG Pro Level',
         variants: [
-          { src: 'bilder/0009.jpg', badge: 'NASM' },
-          { src: 'BILD_HIER/icg-pro-affa.jpg', badge: 'AFFA' },
-          { src: 'bilder/0008.jpg',  badge: 'ACE'  },
-          { src: 'bilder/0004.jpg', badge: 'REPS' },
+          { src: 'bilder/0009.jpg',             badge: 'NASM' },
+          { src: 'BILD_HIER/icg-pro-affa.jpg',  badge: 'AFFA' },
+          { src: 'bilder/0008.jpg',             badge: 'ACE'  },
+          { src: 'bilder/0004.jpg',             badge: 'REPS' },
         ]
       },
       {
         label: 'Coach By Color',
         variants: [
-          { src: 'bilder/0007.jpg', badge: 'NASM' },
-          { src: 'bilder/0006.jpg', badge: 'AFFA' },
-          { src: 'bilder/0005.jpg',  badge: 'ACE'  },
-          { src: 'BILD_HIER/icg-cbc-reps.jpg', badge: 'REPS' },
+          { src: 'bilder/0007.jpg',              badge: 'NASM' },
+          { src: 'bilder/0006.jpg',              badge: 'AFFA' },
+          { src: 'bilder/0005.jpg',              badge: 'ACE'  },
+          { src: 'BILD_HIER/icg-cbc-reps.jpg',  badge: 'REPS' },
         ]
       },
       {
         label: 'Wattrate Power 1',
         variants: [
-          { src: 'bilder/0019.jpg', badge: 'NASM' },
-          { src: 'bilder/0012.jpg', badge: 'AFFA' },
-          { src: 'bilder/0011.jpg',  badge: 'ACE'  },
-          { src: 'BILD_HIER/icg-wattrate-reps.jpg', badge: 'REPS' },
+          { src: 'bilder/0019.jpg',                  badge: 'NASM' },
+          { src: 'bilder/0012.jpg',                  badge: 'AFFA' },
+          { src: 'bilder/0011.jpg',                  badge: 'ACE'  },
+          { src: 'BILD_HIER/icg-wattrate-reps.jpg',  badge: 'REPS' },
         ]
       },
     ]
@@ -413,8 +360,8 @@ const certData = {
     title: 'Sports Nutrition & Meal Planning',
     certs: [
       { label: 'Professional Program in Sports Nutrition', variants: [{ src: 'bilder/0025.jpg',          badge: null }] },
-      { label: 'Unconventional Nutrition',                 variants: [{ src: 'bilder/0030_edited.jpg', badge: null }] },
-      { label: 'Introduction to Mental Disorders',     variants: [{ src: 'bilder/0031_edited.jpg',     badge: null }] },
+      { label: 'Unconventional Nutrition',                 variants: [{ src: 'bilder/0030_edited.jpg',   badge: null }] },
+      { label: 'Introduction to Mental Disorders',         variants: [{ src: 'bilder/0031_edited.jpg',   badge: null }] },
     ]
   },
 
@@ -422,16 +369,16 @@ const certData = {
     issuer: 'AUPS · PBLS · EBF · Coursera',
     title: 'Sports Massage, Aqua Fitness & More',
     certs: [
-      { label: 'Professional Program in Sports Massage', variants: [{ src: 'bilder/0027.jpg',     badge: null }] },
-      { label: 'Professional Program in Sports Personal Training', variants: [{ src: 'bilder/0002.jpg',     badge: null }] },
-      { label: 'Aqua Group Fitness Exercises Coach',     variants: [{ src: 'bilder/0014.jpg',       badge: null }] },
-      { label: 'Functional Mobility Mini-Course',        variants: [{ src: 'bilder/0028.jpg', badge: null }] },
-      { label: 'Leadership Skills · IIM Ahmedabad',     variants: [{ src: 'bilder/0022.jpg',     badge: null }] },
-      { label: 'Excel Quick Tips',     variants: [{ src: 'bilder/0017.jpg',     badge: null }] },
-      { label: 'Time Management Fundamentals',     variants: [{ src: 'bilder/0021.jpg',     badge: null }] },
-      { label: 'Magic World · Fitness Instructor',     variants: [{ src: 'bilder/0024.jpg',     badge: null }] },
-      { label: 'TUI BLUE Samaya · Fitness & Leisure Instructor',     variants: [{ src: 'bilder/0026.jpg',     badge: null }] },
-      { label: 'Aerials · Hera Aerials',     variants: [{ src: 'bilder/0033_edited.jpg',     badge: null }] },
+      { label: 'Professional Program in Sports Massage',           variants: [{ src: 'bilder/0027.jpg',          badge: null }] },
+      { label: 'Professional Program in Sports Personal Training', variants: [{ src: 'bilder/0002.jpg',          badge: null }] },
+      { label: 'Aqua Group Fitness Exercises Coach',               variants: [{ src: 'bilder/0014.jpg',          badge: null }] },
+      { label: 'Functional Mobility Mini-Course',                  variants: [{ src: 'bilder/0028.jpg',          badge: null }] },
+      { label: 'Leadership Skills · IIM Ahmedabad',               variants: [{ src: 'bilder/0022.jpg',          badge: null }] },
+      { label: 'Excel Quick Tips',                                 variants: [{ src: 'bilder/0017.jpg',          badge: null }] },
+      { label: 'Time Management Fundamentals',                     variants: [{ src: 'bilder/0021.jpg',          badge: null }] },
+      { label: 'Magic World · Fitness Instructor',                 variants: [{ src: 'bilder/0024.jpg',          badge: null }] },
+      { label: 'TUI BLUE Samaya · Fitness & Leisure Instructor',  variants: [{ src: 'bilder/0026.jpg',          badge: null }] },
+      { label: 'Aerials · Hera Aerials',                          variants: [{ src: 'bilder/0033_edited.jpg',   badge: null }] },
     ]
   }
 
@@ -449,7 +396,7 @@ function openModal(key) {
   grid.innerHTML = d.certs.map((cert, ci) => {
     const hasMultiple = cert.variants.length > 1;
 
-    const slides = cert.variants.map(v => {
+    const slides = cert.variants.map((v, vi) => {
       const isPlaceholder = v.src.includes('BILD_HIER');
       const imgHtml = isPlaceholder
         ? `<div class="img-placeholder">
@@ -460,8 +407,8 @@ function openModal(key) {
              </svg>
              <span>Bild einfügen</span>
            </div>`
-        : `<img src="${v.src}" alt="${cert.label}" onclick="openLightbox('${v.src}','${cert.label}${v.badge ? ' – ' + v.badge : ''}')">`;
-      return `<div class="cert-img-slide">${imgHtml}</div>`;
+        : `<img src="${v.src}" alt="${cert.label}" onclick="openLightbox('${v.src}','${cert.label}${v.badge ? ' \u2013 ' + v.badge : ''}')">`;
+      return `<div class="cert-img-slide${vi === 0 ? ' active' : ''}">${imgHtml}</div>`;
     }).join('');
 
     const dots = hasMultiple
@@ -474,14 +421,19 @@ function openModal(key) {
 
     const firstBadge = cert.variants[0].badge;
 
+    const arrows = hasMultiple
+      ? `<div class="slider-arrows">
+           <button class="slider-arrow" onclick="moveSlide(${ci},-1)">&#8592;</button>
+           ${dots ? '' : '<span></span>'}
+           <button class="slider-arrow" onclick="moveSlide(${ci},1)">&#8594;</button>
+         </div>`
+      : '';
+
     return `
       <div class="cert-img-card">
-        <div class="cert-img-slider">
-          <div class="slider-inner" id="slider-${ci}">${slides}</div>
-          <button class="slider-arrow prev${hasMultiple?'':' hidden'}" onclick="moveSlide(${ci},-1)">&#8592;</button>
-          <button class="slider-arrow next${hasMultiple?'':' hidden'}" onclick="moveSlide(${ci},1)">&#8594;</button>
-        </div>
-        ${dots}
+        <div class="cert-img-slider" id="slider-${ci}">${slides}</div>
+        ${hasMultiple ? `<div class="slider-dots" id="dots-${ci}">${cert.variants.map((_,vi)=>`<div class="slider-dot${vi===0?' active':''}" onclick="goSlide(${ci},${vi})"></div>`).join('')}</div>` : ''}
+        ${hasMultiple ? `<div class="slider-arrows"><button class="slider-arrow" onclick="moveSlide(${ci},-1)">&#8592;</button><button class="slider-arrow" onclick="moveSlide(${ci},1)">&#8594;</button></div>` : ''}
         <div class="cert-img-label">
           <span>${cert.label}</span>
           ${firstBadge ? `<span class="cert-badge" id="badge-${ci}">${firstBadge}</span>` : ''}
@@ -502,7 +454,8 @@ function moveSlide(ci, dir) {
 
 function goSlide(ci, idx) {
   window._sliderIndex[ci] = idx;
-  document.getElementById(`slider-${ci}`).style.transform = `translateX(-${idx * 100}%)`;
+  const slider = document.getElementById(`slider-${ci}`);
+  slider.querySelectorAll('.cert-img-slide').forEach((s, i) => s.classList.toggle('active', i === idx));
   const dotsEl = document.getElementById(`dots-${ci}`);
   if (dotsEl) dotsEl.querySelectorAll('.slider-dot').forEach((d, i) => d.classList.toggle('active', i === idx));
   const badgeEl = document.getElementById(`badge-${ci}`);
@@ -513,27 +466,22 @@ function closeModal() {
   document.getElementById('modal').classList.remove('active');
   document.body.style.overflow = '';
 }
-
 function closeModalOutside(e) {
   if (e.target === document.getElementById('modal')) closeModal();
 }
-
 function openLightbox(src, alt) {
   if (src.includes('BILD_HIER')) return;
   document.getElementById('lightbox-img').src = src;
   document.getElementById('lightbox-img').alt = alt;
   document.getElementById('lightbox').classList.add('active');
 }
-
 function closeLightbox() {
   document.getElementById('lightbox').classList.remove('active');
 }
-
 document.addEventListener('keydown', e => {
   if (e.key === 'Escape') { closeModal(); closeLightbox(); }
 });
 
-/* Scroll animation */
 const cards = document.querySelectorAll('.cert-card');
 const obs = new IntersectionObserver(entries => {
   entries.forEach(e => {
