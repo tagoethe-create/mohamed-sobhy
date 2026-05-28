@@ -67,13 +67,28 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 .modal-title{font-family:'Bebas Neue',sans-serif;font-size:32px;letter-spacing:1px;}
 
 /* CERTIFICATE IMAGE GRID */
-.modal-images{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px;}
-.cert-img-card{border:1px solid rgba(255,255,255,0.07);overflow:hidden;cursor:pointer;transition:border-color .2s;}
+.modal-images{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px;}
+.cert-img-card{border:1px solid rgba(255,255,255,0.07);overflow:hidden;transition:border-color .2s;}
 .cert-img-card:hover{border-color:var(--bordeaux);}
 .img-placeholder{width:100%;aspect-ratio:3/4;background:#1e1e1e;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;color:#444;}
 .img-placeholder svg{width:32px;height:32px;opacity:.4;}
 .img-placeholder span{font-size:11px;letter-spacing:1px;text-transform:uppercase;opacity:.5;}
-.cert-img-label{padding:10px 14px;font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--gray);border-top:1px solid rgba(255,255,255,0.07);}
+.cert-img-label{padding:10px 14px;font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--gray);border-top:1px solid rgba(255,255,255,0.07);display:flex;align-items:center;justify-content:space-between;}
+.cert-badge{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--bordeaux-light);background:rgba(109,26,42,0.2);border:1px solid var(--bordeaux);padding:3px 8px;flex-shrink:0;}
+
+/* SLIDER */
+.cert-img-slider{position:relative;overflow:hidden;}
+.slider-inner{display:flex;transition:transform .3s ease;}
+.cert-img-slide{min-width:100%;flex-shrink:0;}
+.cert-img-slide img{width:100%;display:block;cursor:pointer;}
+.slider-arrow{position:absolute;top:50%;transform:translateY(-50%);background:rgba(0,0,0,0.75);border:1px solid rgba(255,255,255,0.2);color:#fff;width:30px;height:30px;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:15px;z-index:10;transition:background .2s,border-color .2s;user-select:none;}
+.slider-arrow:hover{background:var(--bordeaux);border-color:var(--bordeaux);}
+.slider-arrow.prev{left:6px;}
+.slider-arrow.next{right:6px;}
+.slider-arrow.hidden{display:none;}
+.slider-dots{display:flex;justify-content:center;gap:5px;padding:7px 0 4px;}
+.slider-dot{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,0.2);cursor:pointer;transition:background .2s;}
+.slider-dot.active{background:var(--bordeaux-light);}
 
 /* LIGHTBOX */
 .lightbox{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.97);z-index:2000;align-items:center;justify-content:center;}
@@ -318,62 +333,115 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);paddi
    Ersetze "BILD_HIER_EINFÜGEN/..." mit echten Bildpfaden,
    z.B. src: 'images/ifaa-aerobic-step.jpg'
    ════════════════════════════════════════════ */
+/* ════════════════════════════════════════════
+   ZERTIFIKAT-DATEN
+   Für Zertifikate MIT Varianten (z.B. ICG):
+     variants: [ { src: '...', badge: 'NASM' }, ... ]
+   Für Zertifikate OHNE Varianten:
+     variants: [ { src: '...', badge: null } ]
+   Ersetze 'BILD_HIER/...' mit echten Bildpfaden.
+   ════════════════════════════════════════════ */
 const certData = {
+
   ifaa: {
     issuer: 'IFAA Germany',
     title: 'International Fitness & Aerobics Academy',
     certs: [
-      { src: 'BILD_HIER_EINFÜGEN/ifaa-aerobic-step.jpg',  label: 'Group Fitness B-License · Aerobic & Step' },
-      { src: 'BILD_HIER_EINFÜGEN/ifaa-workout.jpg',       label: 'Group Fitness B-License · Workout Instructor' },
-      { src: 'BILD_HIER_EINFÜGEN/ifaa-hiit.jpg',          label: 'Functional Training Basics & HIIT' },
+      { label: 'Group Fitness B-License · Aerobic & Step',    variants: [{ src: 'BILD_HIER/ifaa-aerobic-step.jpg', badge: null }] },
+      { label: 'Group Fitness B-License · Workout Instructor', variants: [{ src: 'BILD_HIER/ifaa-workout.jpg',      badge: null }] },
+      { label: 'Functional Training Basics & HIIT',            variants: [{ src: 'BILD_HIER/ifaa-hiit.jpg',         badge: null }] },
     ]
   },
+
   iasst: {
     issuer: 'IASST · International Academy of Sports Science',
     title: 'Rehabilitation & Special Needs Specialist',
     certs: [
-      { src: 'BILD_HIER_EINFÜGEN/iasst-rehab.jpg',         label: 'Rehabilitation Specialist · July 2024' },
-      { src: 'BILD_HIER_EINFÜGEN/iasst-special-needs.jpg', label: 'Special Needs Specialist · July 2024' },
+      { label: 'Rehabilitation Specialist · July 2024', variants: [{ src: 'BILD_HIER/iasst-rehab.jpg',         badge: null }] },
+      { label: 'Special Needs Specialist · July 2024',  variants: [{ src: 'BILD_HIER/iasst-special-needs.jpg', badge: null }] },
     ]
   },
+
   icg: {
     issuer: 'ICG · Indoor Cycling Group',
     title: 'Indoor Cycling Certification',
     certs: [
-      { src: 'BILD_HIER_EINFÜGEN/icg-basic.jpg',          label: 'ICG Basic Level Online' },
-      { src: 'BILD_HIER_EINFÜGEN/icg-pro.jpg',            label: 'ICG Pro Level Online' },
-      { src: 'BILD_HIER_EINFÜGEN/icg-coach-by-color.jpg', label: 'Coach By Color Online' },
-      { src: 'BILD_HIER_EINFÜGEN/icg-wattrate.jpg',       label: 'Wattrate Power 1 Online' },
+      {
+        label: 'ICG Basic Level',
+        variants: [
+          { src: 'BILD_HIER/icg-basic-nasm.jpg', badge: 'NASM' },
+          { src: 'BILD_HIER/icg-basic-affa.jpg', badge: 'AFFA' },
+          { src: 'BILD_HIER/icg-basic-ace.jpg',  badge: 'ACE'  },
+          { src: 'BILD_HIER/icg-basic-reps.jpg', badge: 'REPS' },
+        ]
+      },
+      {
+        label: 'ICG Pro Level',
+        variants: [
+          { src: 'BILD_HIER/icg-pro-nasm.jpg', badge: 'NASM' },
+          { src: 'BILD_HIER/icg-pro-affa.jpg', badge: 'AFFA' },
+          { src: 'BILD_HIER/icg-pro-ace.jpg',  badge: 'ACE'  },
+          { src: 'BILD_HIER/icg-pro-reps.jpg', badge: 'REPS' },
+        ]
+      },
+      {
+        label: 'Coach By Color',
+        variants: [
+          { src: 'BILD_HIER/icg-cbc-nasm.jpg', badge: 'NASM' },
+          { src: 'BILD_HIER/icg-cbc-affa.jpg', badge: 'AFFA' },
+          { src: 'BILD_HIER/icg-cbc-ace.jpg',  badge: 'ACE'  },
+          { src: 'BILD_HIER/icg-cbc-reps.jpg', badge: 'REPS' },
+        ]
+      },
+      {
+        label: 'Wattrate Power 1',
+        variants: [
+          { src: 'BILD_HIER/icg-wattrate-nasm.jpg', badge: 'NASM' },
+          { src: 'BILD_HIER/icg-wattrate-affa.jpg', badge: 'AFFA' },
+          { src: 'BILD_HIER/icg-wattrate-ace.jpg',  badge: 'ACE'  },
+          { src: 'BILD_HIER/icg-wattrate-reps.jpg', badge: 'REPS' },
+        ]
+      },
     ]
   },
+
   nutrition: {
     issuer: 'AUPS · Edraak',
     title: 'Sports Nutrition & Meal Planning',
     certs: [
-      { src: 'BILD_HIER_EINFÜGEN/aups-sports-nutrition.jpg',       label: 'Professional Program in Sports Nutrition' },
-      { src: 'BILD_HIER_EINFÜGEN/edraak-unconventional-nutrition.jpg', label: 'Unconventional Nutrition' },
+      { label: 'Professional Program in Sports Nutrition', variants: [{ src: 'BILD_HIER/aups-sports-nutrition.jpg',          badge: null }] },
+      { label: 'Unconventional Nutrition',                 variants: [{ src: 'BILD_HIER/edraak-unconventional-nutrition.jpg', badge: null }] },
     ]
   },
+
   additional: {
     issuer: 'AUPS · PBLS · EBF · Coursera',
     title: 'Sports Massage, Aqua Fitness & More',
     certs: [
-      { src: 'BILD_HIER_EINFÜGEN/aups-sports-massage.jpg',     label: 'Professional Program in Sports Massage' },
-      { src: 'BILD_HIER_EINFÜGEN/pbls-aqua-fitness.jpg',       label: 'Aqua Group Fitness Exercises Coach' },
-      { src: 'BILD_HIER_EINFÜGEN/ebf-functional-mobility.jpg', label: 'Functional Mobility Mini-Course' },
-      { src: 'BILD_HIER_EINFÜGEN/coursera-leadership.jpg',     label: 'Leadership Skills · IIM Ahmedabad' },
+      { label: 'Professional Program in Sports Massage', variants: [{ src: 'BILD_HIER/aups-sports-massage.jpg',     badge: null }] },
+      { label: 'Aqua Group Fitness Exercises Coach',     variants: [{ src: 'BILD_HIER/pbls-aqua-fitness.jpg',       badge: null }] },
+      { label: 'Functional Mobility Mini-Course',        variants: [{ src: 'BILD_HIER/ebf-functional-mobility.jpg', badge: null }] },
+      { label: 'Leadership Skills · IIM Ahmedabad',     variants: [{ src: 'BILD_HIER/coursera-leadership.jpg',     badge: null }] },
     ]
   }
+
 };
+
+let _currentData = null;
 
 function openModal(key) {
   const d = certData[key];
+  _currentData = d;
   document.getElementById('modal-issuer').textContent = d.issuer;
   document.getElementById('modal-title').textContent  = d.title;
+
   const grid = document.getElementById('modal-images');
-  grid.innerHTML = d.certs.map(c => `
-    <div class="cert-img-card" onclick="openLightbox('${c.src}', '${c.label}')">
-      ${c.src.includes('BILD_HIER_EINFÜGEN')
+  grid.innerHTML = d.certs.map((cert, ci) => {
+    const hasMultiple = cert.variants.length > 1;
+
+    const slides = cert.variants.map(v => {
+      const isPlaceholder = v.src.includes('BILD_HIER');
+      const imgHtml = isPlaceholder
         ? `<div class="img-placeholder">
              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
                <rect x="3" y="3" width="18" height="18" rx="2"/>
@@ -382,13 +450,53 @@ function openModal(key) {
              </svg>
              <span>Bild einfügen</span>
            </div>`
-        : `<img src="${c.src}" alt="${c.label}" style="width:100%;display:block;">`
-      }
-      <div class="cert-img-label">${c.label}</div>
-    </div>
-  `).join('');
+        : `<img src="${v.src}" alt="${cert.label}" onclick="openLightbox('${v.src}','${cert.label}${v.badge ? ' – ' + v.badge : ''}')">`;
+      return `<div class="cert-img-slide">${imgHtml}</div>`;
+    }).join('');
+
+    const dots = hasMultiple
+      ? `<div class="slider-dots" id="dots-${ci}">
+           ${cert.variants.map((_, vi) =>
+             `<div class="slider-dot${vi===0?' active':''}" onclick="goSlide(${ci},${vi})"></div>`
+           ).join('')}
+         </div>`
+      : '';
+
+    const firstBadge = cert.variants[0].badge;
+
+    return `
+      <div class="cert-img-card">
+        <div class="cert-img-slider">
+          <div class="slider-inner" id="slider-${ci}">${slides}</div>
+          <button class="slider-arrow prev${hasMultiple?'':' hidden'}" onclick="moveSlide(${ci},-1)">&#8592;</button>
+          <button class="slider-arrow next${hasMultiple?'':' hidden'}" onclick="moveSlide(${ci},1)">&#8594;</button>
+        </div>
+        ${dots}
+        <div class="cert-img-label">
+          <span>${cert.label}</span>
+          ${firstBadge ? `<span class="cert-badge" id="badge-${ci}">${firstBadge}</span>` : ''}
+        </div>
+      </div>
+    `;
+  }).join('');
+
+  window._sliderIndex = d.certs.map(() => 0);
   document.getElementById('modal').classList.add('active');
   document.body.style.overflow = 'hidden';
+}
+
+function moveSlide(ci, dir) {
+  const total = _currentData.certs[ci].variants.length;
+  goSlide(ci, (window._sliderIndex[ci] + dir + total) % total);
+}
+
+function goSlide(ci, idx) {
+  window._sliderIndex[ci] = idx;
+  document.getElementById(`slider-${ci}`).style.transform = `translateX(-${idx * 100}%)`;
+  const dotsEl = document.getElementById(`dots-${ci}`);
+  if (dotsEl) dotsEl.querySelectorAll('.slider-dot').forEach((d, i) => d.classList.toggle('active', i === idx));
+  const badgeEl = document.getElementById(`badge-${ci}`);
+  if (badgeEl) badgeEl.textContent = _currentData.certs[ci].variants[idx].badge || '';
 }
 
 function closeModal() {
@@ -401,7 +509,7 @@ function closeModalOutside(e) {
 }
 
 function openLightbox(src, alt) {
-  if (src.includes('BILD_HIER_EINFÜGEN')) return;
+  if (src.includes('BILD_HIER')) return;
   document.getElementById('lightbox-img').src = src;
   document.getElementById('lightbox-img').alt = alt;
   document.getElementById('lightbox').classList.add('active');
